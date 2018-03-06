@@ -13,7 +13,6 @@ public abstract class DaoFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
-        System.out.println("test");
         getEntityManager().persist(entity);
     }
 

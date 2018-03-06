@@ -1,16 +1,35 @@
 package Dao;
 
 import Models.Account;
+
 import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.*;
 
-public interface AccountDao {
+@Stateless @JPA
+public class AccountDao extends DaoFacade<Account> {
+    @PersistenceContext(unitName = "KwetterPU")
+    private EntityManager em;
 
-    void create(Account account);
+    public AccountDao() {
+        super(Account.class);
+    }
 
-    void remove(Account account);
+    protected EntityManager getEntityManager() {
+        return em;
+    }
 
-    Account findByName(String name);
+    public Account findByName(String name) {
+        TypedQuery<Account> query = em.createNamedQuery("account.findByname", Account.class);
+        query.setParameter("userName", name);
+        List<Account> result = query.getResultList();
+        System.out.println("count: " + result.size());
+        return result.get(0);
+    }
 
-    ArrayList<Account> getAccounts();
-
+    public ArrayList<Account> getAccounts() {
+        Query query = em.createQuery("SELECT a FROM Account a");
+        return  new ArrayList<>(query.getResultList());
+    }
 }
