@@ -1,28 +1,39 @@
 package Models;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "account.findByname", query = "SELECT a FROM Account a WHERE a.userName = :userName"),
+        @NamedQuery(name = "account.count", query = "SELECT COUNT(a) FROM Account a")})
+@XmlRootElement
 public class Account implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "accountId")
+    @GeneratedValue
     private long id;
 
-    @Column(name = "username", length = 50)
     private String userName;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "rights")
     private int rights;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="profileId")
+    @JoinColumn(name="profileid")
     private Profile AccountProfile;
+
+    public Account() {
+    }
+
+    public Account(String userName, String email, int rights) {
+        this.userName = userName;
+        this.email = email;
+        this.rights = rights;
+    }
 
     public long getId() {
         return id;
@@ -62,5 +73,27 @@ public class Account implements Serializable{
 
     public void setAccountProfile(Profile accountProfile) {
         AccountProfile = accountProfile;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Account other = (Account) obj;
+        return Objects.equals(this.userName, other.userName);
     }
 }

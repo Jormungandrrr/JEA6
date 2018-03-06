@@ -9,8 +9,7 @@ import java.util.ArrayList;
 public class Profile implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "profileId")
+    @GeneratedValue
     private long id;
 
     @ManyToOne(fetch=FetchType.LAZY)
@@ -34,6 +33,9 @@ public class Profile implements Serializable{
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages;
+
+    public Profile() {
+    }
 
     public Account getOwner() {
         return owner;

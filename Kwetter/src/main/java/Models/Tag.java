@@ -6,8 +6,7 @@ import java.io.Serializable;
 @Entity
 public class Tag implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tagId")
+    @GeneratedValue
     private long id;
 
     @Column(name = "name")
@@ -15,6 +14,9 @@ public class Tag implements Serializable{
 
     @Column(name = "description")
     private String description;
+
+    public Tag() {
+    }
 
     public long getId() {
         return id;
