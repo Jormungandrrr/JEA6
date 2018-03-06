@@ -9,8 +9,6 @@ import javax.persistence.*;
 
 @Stateless @JPA
 public class AccountDao extends DaoFacade<Account> {
-    @PersistenceContext(unitName = "KwetterPU")
-    private EntityManager em;
 
     public AccountDao() {
         super(Account.class);

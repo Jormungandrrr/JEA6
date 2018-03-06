@@ -1,8 +1,12 @@
 package Dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 public abstract class DaoFacade<T> {
+    
+    @PersistenceContext(unitName = "KwetterPU")
+    protected EntityManager em;
 
     private final Class<T> entityClass;
 

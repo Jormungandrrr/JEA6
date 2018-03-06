@@ -23,7 +23,7 @@
 //public class AccountTest {
 //
 //    @Mock
-//    AccountDaoJpa ad;
+//    AccountDao ad;
 //
 //    @InjectMocks
 //    private AccountService as;
