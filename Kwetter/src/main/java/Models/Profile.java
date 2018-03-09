@@ -1,20 +1,24 @@
 package Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "profile.count", query = "SELECT COUNT(p) FROM Profile p")})
+@XmlRootElement
 public class Profile implements Serializable{
 
     @Id
     @GeneratedValue
     private long id;
-
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="accountId")
-    private Account owner;
 
     @Column(name = "biography")
     private String biography;
@@ -28,21 +32,20 @@ public class Profile implements Serializable{
     @Column(name = "photo")
     private  String photo;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Profile> following;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Message> messages;
 
     public Profile() {
     }
 
-    public Account getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Account owner) {
-        this.owner = owner;
+    public Profile(String biography, String location) {
+        this.biography = biography;
+        this.location = location;
     }
 
     public String getBiography() {

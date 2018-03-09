@@ -1,6 +1,7 @@
 package service;
 
 import Models.Account;
+import Models.Profile;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -12,13 +13,16 @@ import javax.inject.Inject;
 public class StartUp {
 
     @Inject
-    private AccountService service;
+    private AccountService as;
 
     public StartUp() {
     }
 
     @PostConstruct
     private void intData(){
-        service.addAccount(new Account("test", "test@test.nl", 3));
+        Account test = new Account("test", "test@test.nl", 3);
+        test.setAccountProfile(new Profile("test test test", "test"));
+        
+        as.addAccount(test);
     }
 }

@@ -22,7 +22,6 @@ public class AccountDao extends DaoFacade<Account> {
         TypedQuery<Account> query = em.createNamedQuery("account.findByname", Account.class);
         query.setParameter("userName", name);
         List<Account> result = query.getResultList();
-        System.out.println("count: " + result.size());
         return result.get(0);
     }
 

@@ -22,9 +22,8 @@ public class Account implements Serializable{
 
     private int rights;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="profileid")
-    private Profile AccountProfile;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Profile profile;
 
     public Account() {
     }
@@ -68,11 +67,11 @@ public class Account implements Serializable{
     }
 
     public Profile getAccountProfile() {
-        return AccountProfile;
+        return profile;
     }
 
     public void setAccountProfile(Profile accountProfile) {
-        AccountProfile = accountProfile;
+        profile = accountProfile;
     }
 
     @Override
