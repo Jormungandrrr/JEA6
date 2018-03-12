@@ -26,8 +26,8 @@ public class AccountService {
             return accountDao.getAccounts();
         }
 
-        public Account findByName(String name) {
-            return accountDao.findByName(name);
+        public Account findByUserName(String username) {
+            return accountDao.findByName(username);
         }
 
         public AccountService() {

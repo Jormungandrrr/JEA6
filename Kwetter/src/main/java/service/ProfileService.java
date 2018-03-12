@@ -1,9 +1,7 @@
 package service;
 
-import Dao.AccountDao;
 import Dao.JPA;
 import Dao.ProfileDao;
-import Models.Account;
 import Models.Profile;
 
 import javax.inject.Inject;
