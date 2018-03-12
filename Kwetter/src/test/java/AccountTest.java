@@ -4,33 +4,36 @@
  * and open the template in the editor.
  */
 
-import Dao.AccountDao;
-import Models.Account;
-import javax.inject.Inject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import service.AccountService;
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.CoreMatchers.equalTo;
+
 /**
  *
  * @author Jorrit
  */
 public class AccountTest {
+
+    private String url = "http://localhost:8080/Kwetter";
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    @Test
+    public void ServerOnline(){
+       given().when().get(url).then().statusCode(200);
+    }
     
-//    private AccountService as;
-//
-//    @Before
-//    public void setUp() {
-//    }
-//
-//    @After
-//    public void tearDown() {
-//    }
-//
-//    @Test
-//    public void getTestAccount() {
-//        Account testaccount = as.findByName("test");
-//        assertSame("test", testaccount.getUserName());
-//    }
+    @Test
+    public void getTestAccount() {
+       get(url + "/api/accounts/test").then().body("userName", equalTo("test"));
+    }
 }
