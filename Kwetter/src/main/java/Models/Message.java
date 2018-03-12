@@ -3,8 +3,12 @@ package Models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "message.count", query = "SELECT COUNT(m) FROM Message m")})
+@XmlRootElement
 public class Message implements Serializable{
 
     @Id
@@ -27,6 +31,18 @@ public class Message implements Serializable{
     public Message() {
     }
 
+    public Message(Profile owner, String content) {
+        this.content = content;
+        this.owner = owner;
+    }
+
+    public Message(String content, Profile owner, List<Profile> mentions, List<Tag> tags) {
+        this.content = content;
+        this.owner = owner;
+        this.mentions = mentions;
+        this.tags = tags;
+    }
+    
     public long getId() {
         return id;
     }
@@ -43,27 +59,19 @@ public class Message implements Serializable{
         this.content = content;
     }
 
-//    public Profile getOwner() {
-//        return owner;
-//    }
-//
-//    public void setOwner(Profile owner) {
-//        this.owner = owner;
-//    }
-//
-//    public List<Profile> getMentions() {
-//        return mentions;
-//    }
-//
-//    public void setMentions(List<Profile> mentions) {
-//        this.mentions = mentions;
-//    }
-//
-//    public List<Tag> getTags() {
-//        return tags;
-//    }
-//
-//    public void setTags(List<Tag> tags) {
-//        this.tags = tags;
-//    }
+    public List<Profile> getMentions() {
+        return mentions;
+    }
+
+    public void setMentions(List<Profile> mentions) {
+        this.mentions = mentions;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 }

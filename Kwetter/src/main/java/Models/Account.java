@@ -66,12 +66,12 @@ public class Account implements Serializable{
         this.rights = rights;
     }
 
-    public Profile getAccountProfile() {
+    public Profile getProfile() {
         return profile;
     }
 
-    public void setAccountProfile(Profile accountProfile) {
-        profile = accountProfile;
+    public void setProfile(Profile prof) {
+        profile = prof;
     }
 
     @Override

@@ -1,7 +1,10 @@
 package service;
 
 import Models.Account;
+import Models.Message;
 import Models.Profile;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -21,8 +24,12 @@ public class StartUp {
     @PostConstruct
     private void intData(){
         Account test = new Account("test", "test@test.nl", 3);
-        test.setAccountProfile(new Profile("test test test", "test"));
-        
+        Profile testProfile = new Profile("test test test", "test");
+        List<Message> messages = new ArrayList<>();
+        messages.add(new Message(testProfile, "init message"));
+        testProfile.setMessages(messages);
+        testProfile.getMessages().add(new Message(testProfile, "test message"));
+        test.setProfile(testProfile);
         as.addAccount(test);
     }
 }
