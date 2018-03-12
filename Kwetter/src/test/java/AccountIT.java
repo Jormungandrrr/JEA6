@@ -43,6 +43,7 @@ public class AccountIT {
     @Test
     public void UpdateAccount() { 
        post(url + "/api/accounts/test?email=updated@email.com&rights=1");
+       get(url + "/api/accounts/test").then().body("rights", equalTo(1));
     }
     
     @Test
