@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "profile.findByid", query = "SELECT p FROM Profile p WHERE p.id = :id"),
         @NamedQuery(name = "profile.count", query = "SELECT COUNT(p) FROM Profile p")
 })
 @XmlRootElement
@@ -34,11 +33,11 @@ public class Profile implements Serializable{
     private  String photo;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Profile> following;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages;
 
     public Profile() {

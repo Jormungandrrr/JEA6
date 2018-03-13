@@ -51,6 +51,21 @@ public class ProfileIT {
        post(url + "/5/follower?followerid=2");
     }
     
+     @Test
+    public void RemoveFollower() { 
+       delete(url + "/5/follower?followerid=2");
+    }
+    
+    @Test
+    public void AddMessage() { 
+       post(url + "/5/message?id=6&content=wazaa");
+    }
+    
+     @Test
+    public void RemoveMessage() { 
+       delete(url + "/5/message?id=6");
+    }
+    
 //    @Test
 //    public void DeleteProfile() { 
 //       delete(url + "/5");

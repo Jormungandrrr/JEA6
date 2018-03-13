@@ -26,5 +26,4 @@ public class MessageDao extends DaoFacade<Message>{
         Query query = em.createQuery("SELECT m FROM Message m");
         return  new ArrayList<>(query.getResultList());
     }
-    
 }

@@ -13,22 +13,27 @@ import java.util.ArrayList;
 @Stateless
 public class MessageService {
 
-        @Inject @JPA
-        private MessageDao messageDao;
+    @Inject
+    @JPA
+    private MessageDao messageDao;
 
-        public void addAccount(Message message) {
-            messageDao.create(message);
-        }
-
-        public void removeAccount(Message message) {
-            messageDao.remove(message);
-        }
-
-        public ArrayList<Message> getMessages() {
-            return messageDao.getMessages();
-        }
-
-        public MessageService() {
-        }
-
+    public void addAccount(Message message) {
+        messageDao.create(message);
     }
+
+    public void removeAccount(Message message) {
+        messageDao.remove(message);
+    }
+
+    public ArrayList<Message> getMessages() {
+        return messageDao.getMessages();
+    }
+
+    public Message findById(int id) {
+        return messageDao.find(id);
+    }
+
+    public MessageService() {
+    }
+
+}

@@ -71,9 +71,8 @@ public class ProfileResource {
     
     @DELETE
     @Path("{id}/message")
-    public void deleteMessage(@PathParam("id") int id, @QueryParam("content") String content) {
+    public void deleteMessage(@PathParam("id") int id, @QueryParam("content") int messageid) {
         Profile prof = p.findById(id);
-        prof.getMessages().remove(new Message(prof, content));
     }
     
     @POST

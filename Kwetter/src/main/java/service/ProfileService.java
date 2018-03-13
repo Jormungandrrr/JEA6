@@ -27,7 +27,7 @@ public class ProfileService {
         }
         
          public Profile findById(int id) {
-            return profileDao.findById(id);
+            return profileDao.find(id);
         }
 
         public ProfileService() {
