@@ -23,8 +23,8 @@ public class StartUp {
 
     @PostConstruct
     private void intData(){
-        Account test = new Account("test", "test@test.nl", 3);
-        Profile testProfile = new Profile("test test test", "test");
+        Account test = new Account("test", "test@test.nl", 3, "test");
+        Profile testProfile = new Profile("testprofile","test test test", "test");
         List<Message> messages = new ArrayList<>();
         messages.add(new Message(testProfile, "init message"));
         testProfile.setMessages(messages);
