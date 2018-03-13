@@ -25,6 +25,10 @@ public class ProfileService {
         public ArrayList<Profile> getProfiles() {
             return profileDao.getProfiles();
         }
+        
+         public Profile findById(int id) {
+            return profileDao.findById(id);
+        }
 
         public ProfileService() {
         }

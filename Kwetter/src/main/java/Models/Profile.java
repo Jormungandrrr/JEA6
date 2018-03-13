@@ -1,24 +1,25 @@
 package Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "profile.count", query = "SELECT COUNT(p) FROM Profile p")})
+        @NamedQuery(name = "profile.findByid", query = "SELECT p FROM Profile p WHERE p.id = :id"),
+        @NamedQuery(name = "profile.count", query = "SELECT COUNT(p) FROM Profile p")
+})
 @XmlRootElement
 public class Profile implements Serializable{
 
     @Id
     @GeneratedValue
     private long id;
+    
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "biography")
     private String biography;
@@ -43,11 +44,20 @@ public class Profile implements Serializable{
     public Profile() {
     }
 
-    public Profile(String biography, String location) {
+    public Profile(String name, String biography, String location) {
+        this.name = name;
         this.biography = biography;
         this.location = location;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public String getBiography() {
         return biography;
     }

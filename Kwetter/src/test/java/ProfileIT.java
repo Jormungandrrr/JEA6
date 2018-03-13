@@ -48,11 +48,11 @@ public class ProfileIT {
     
     @Test
     public void AddFollower() { 
-       post(url + "/5?followerid=2");
+       post(url + "/5/follower?followerid=2");
     }
     
-    @Test
-    public void DeleteProfile() { 
-       delete(url + "/5");
-    }
+//    @Test
+//    public void DeleteProfile() { 
+//       delete(url + "/5");
+//    }
 }
