@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
  */
 public class AccountIT {
 
-    private String url = "http://localhost:8080/Kwetter";
+    private String url = "http://localhost:8080/Kwetter/api/accounts";
     @Before
     public void setUp() {
     }
@@ -26,28 +26,28 @@ public class AccountIT {
 
     @Test
     public void ServerOnline(){
-       given().when().get(url).then().statusCode(200);
+       given().when().get("http://localhost:8080/Kwetter").then().statusCode(200);
     }
     
     @Test
     public void getTestAccount() {
-       get(url + "/api/accounts/test").then().body("userName", equalTo("test"));
+       get(url + "/test").then().body("userName", equalTo("test"));
     }
     
     @Test
     public void CreateAccount() { 
-       put(url + "/api/accounts?username=puttest&email=test@test.nl");
-       get(url + "/api/accounts/puttest").then().body("userName", equalTo("puttest"));
+       put(url + "?username=puttest&email=test@test.nl");
+       get(url + "/puttest").then().body("userName", equalTo("puttest"));
     }
     
     @Test
     public void UpdateAccount() { 
-       post(url + "/api/accounts/test?email=updated@email.com&rights=1");
-       get(url + "/api/accounts/test").then().body("rights", equalTo(1));
+       post(url + "/test?email=updated@email.com&rights=1");
+       get(url + "/test").then().body("rights", equalTo(1));
     }
     
     @Test
     public void DeleteAccount() { 
-       delete(url + "/api/accounts?username=puttest&email=test@test.nl");
+       delete(url + "?username=puttest");
     }
 }

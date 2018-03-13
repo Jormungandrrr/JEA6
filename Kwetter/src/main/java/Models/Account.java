@@ -19,6 +19,8 @@ public class Account implements Serializable{
     private String userName;
 
     private String email;
+    
+     private String hash;
 
     private int rights;
 
@@ -28,10 +30,11 @@ public class Account implements Serializable{
     public Account() {
     }
 
-    public Account(String userName, String email, int rights) {
+    public Account(String userName, String email, int rights, String hash) {
         this.userName = userName;
         this.email = email;
         this.rights = rights;
+        this.hash = hash;
     }
 
     public long getId() {
@@ -74,6 +77,15 @@ public class Account implements Serializable{
         profile = prof;
     }
 
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 7;

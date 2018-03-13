@@ -46,8 +46,8 @@ public class AccountResource {
     }
 
     @PUT
-    public void createAccount(@QueryParam("username") String username, @QueryParam("email") String email) {
-        a.addAccount(new Account(username, email, 3));
+    public void createAccount(@QueryParam("username") String username, @QueryParam("email") String email, @QueryParam("hash") String hash) {
+        a.addAccount(new Account(username, email, 3, hash));
     }
 
     @POST
