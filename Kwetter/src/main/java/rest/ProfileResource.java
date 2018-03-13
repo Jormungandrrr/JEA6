@@ -21,6 +21,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import service.AccountService;
+import service.MessageService;
 import service.ProfileService;
 
 /**
@@ -33,6 +34,9 @@ public class ProfileResource {
 
     @Inject
     private ProfileService p;
+    
+    @Inject
+    private MessageService m;
 
     @GET
     public List<Profile> getAll() {
@@ -73,6 +77,8 @@ public class ProfileResource {
     @Path("{id}/message")
     public void deleteMessage(@PathParam("id") int id, @QueryParam("content") int messageid) {
         Profile prof = p.findById(id);
+        Message toremove = m.findById(messageid);
+        prof.getMessages().remove(toremove);
     }
     
     @POST

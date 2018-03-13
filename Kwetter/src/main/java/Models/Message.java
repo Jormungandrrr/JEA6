@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "message.count", query = "SELECT COUNT(m) FROM Message m")})
+    @NamedQuery(name = "message.count", query = "SELECT COUNT(m) FROM Message m")})
 @XmlRootElement
-public class Message implements Serializable{
+public class Message implements Serializable {
 
     @Id
     @GeneratedValue
@@ -18,8 +18,14 @@ public class Message implements Serializable{
     @Column(name = "content")
     private String content;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="profileId")
+    @Column(name = "likes")
+    private int likes;
+
+    @Column(name = "dislike")
+    private int dislike;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profileId")
     private Profile owner;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -42,7 +48,7 @@ public class Message implements Serializable{
         this.mentions = mentions;
         this.tags = tags;
     }
-    
+
     public long getId() {
         return id;
     }
