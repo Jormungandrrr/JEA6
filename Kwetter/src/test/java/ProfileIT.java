@@ -29,6 +29,8 @@ public class ProfileIT {
     public void tearDown() {
     }
     
+    
+    
     @Test
     public void getTestprofile() {
        get(url + "/2").then().body("name", equalTo("testprofile"));

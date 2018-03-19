@@ -33,6 +33,7 @@ public class AccountResource {
     private AccountService a;
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Account> getAll() {
         return a.getAccounts();
     }

@@ -39,6 +39,7 @@ public class ProfileResource {
     private MessageService m;
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Profile> getAll() {
         return p.getProfiles();
     }

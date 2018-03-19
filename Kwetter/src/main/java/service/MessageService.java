@@ -17,11 +17,11 @@ public class MessageService {
     @JPA
     private MessageDao messageDao;
 
-    public void addAccount(Message message) {
+    public void addMessage(Message message) {
         messageDao.create(message);
     }
 
-    public void removeAccount(Message message) {
+    public void removeMessage(Message message) {
         messageDao.remove(message);
     }
 
