@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -48,4 +49,12 @@ public class MessageResource {
         
         m.addMessage(new Message());
     }
+    
+    @POST
+    @Path("{id}")
+    public void likemessage(@PathParam("id") int id, @QueryParam("profileid") String profileid) {
+         Message message = m.findById(id);
+         message.setLikes(message.getLikes() + 1);
+    }
+    
 }
