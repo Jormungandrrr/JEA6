@@ -29,4 +29,16 @@ public class AccountDao extends DaoFacade<Account> {
         Query query = em.createQuery("SELECT a FROM Account a");
         return  new ArrayList<>(query.getResultList());
     }
+    
+    public boolean checkIfExists(String name){
+        Query query = em.createNamedQuery("account.checkIfExists", Account.class);
+        query.setParameter("userName", name);
+        int count = ((Number)query.getSingleResult()).intValue();
+        if (count == 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 }

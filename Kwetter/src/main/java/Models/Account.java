@@ -8,7 +8,10 @@ import java.util.Objects;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "account.findByname", query = "SELECT a FROM Account a WHERE a.userName = :userName"),
-        @NamedQuery(name = "account.count", query = "SELECT COUNT(a) FROM Account a")})
+        @NamedQuery(name = "account.count", query = "SELECT COUNT(a) FROM Account a"),
+        @NamedQuery(name = "account.checkIfExists", query = "SELECT COUNT(a) FROM Account a Where a.userName = :userName")
+})
+        
 @XmlRootElement
 public class Account implements Serializable{
 

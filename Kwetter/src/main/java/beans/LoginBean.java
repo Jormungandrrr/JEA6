@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import org.primefaces.PrimeFaces;
 import service.AccountService;
 
@@ -21,42 +22,49 @@ import service.AccountService;
  */
 @Named(value = "login")
 @SessionScoped
-public class LoginBean implements Serializable{
+public class LoginBean implements Serializable {
 
-        private String username;
-        private String password;
-        private AccountService as;
+    private String username;
+    private String password;
+    @Inject
+    private AccountService as;
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-        
-        public String getPassword() {
-		return password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-        
-        public void login(ActionEvent event) {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void login(ActionEvent event) {
         FacesMessage message = null;
         boolean loggedIn = false;
-         
-        if(username != null && username.equals("admin") && password != null && password.equals("admin")) {
-            loggedIn = true;
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);
+
+        if (username != null && password != null && as.checkIfExists(username)) {
+            Account acc = as.findByUserName(username);
+            if (acc != null && username.equals(acc.getUserName()) && password.equals(acc.getHash())) {
+                loggedIn = true;
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);
+            } else {
+                loggedIn = false;
+                message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
+            }
         } else {
             loggedIn = false;
             message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
         }
-         
+
         FacesContext.getCurrentInstance().addMessage(null, message);
         PrimeFaces.current().ajax().addCallbackParam("loggedIn", loggedIn);
-    } 
-    
+    }
+
 }

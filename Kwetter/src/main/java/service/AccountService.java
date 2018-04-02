@@ -34,6 +34,10 @@ public class AccountService {
     public Account findById(int id) {
         return accountDao.find(id);
     }
+    
+    public boolean checkIfExists(String username) {
+        return accountDao.checkIfExists(username);
+    }
 
     public AccountService() {
     }
