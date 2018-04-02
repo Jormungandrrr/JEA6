@@ -20,7 +20,7 @@ public class Account implements Serializable{
 
     private String email;
     
-     private String hash;
+    private String hash;
 
     private int rights;
 
