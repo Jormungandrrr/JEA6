@@ -38,12 +38,21 @@ public class ProfileResource {
     @Inject
     private MessageService m;
 
+    /**
+     *
+     * @return
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Profile> getAll() {
         return p.getProfiles();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -52,11 +61,25 @@ public class ProfileResource {
         return prof;
     }
 
+    /**
+     *
+     * @param name
+     * @param bio
+     * @param loc
+     */
     @PUT
     public void createprofile(@QueryParam("name") String name, @QueryParam("biography") String bio, @QueryParam("location") String loc) {
         p.addprofile(new Profile(name, bio, loc));
     }
 
+    /**
+     *
+     * @param id
+     * @param bio
+     * @param location
+     * @param photo
+     * @param website
+     */
     @POST
     @Path("{id}")
     public void updateProfile(@PathParam("id") int id, @QueryParam("biography") String bio, @QueryParam("location") String location, @QueryParam("photo") String photo, @QueryParam("website") String website) {
@@ -67,6 +90,11 @@ public class ProfileResource {
         prof.setWebsite(website);
     }
     
+    /**
+     *
+     * @param id
+     * @param content
+     */
     @POST
     @Path("{id}/message")
     public void addMessage(@PathParam("id") int id, @QueryParam("content") String content) {
@@ -74,6 +102,11 @@ public class ProfileResource {
         prof.getMessages().add(new Message(prof, content));
     }
     
+    /**
+     *
+     * @param id
+     * @param messageid
+     */
     @DELETE
     @Path("{id}/message")
     public void deleteMessage(@PathParam("id") int id, @QueryParam("content") int messageid) {
@@ -82,6 +115,11 @@ public class ProfileResource {
         prof.getMessages().remove(toremove);
     }
     
+    /**
+     *
+     * @param id
+     * @param followerid
+     */
     @POST
     @Path("{id}/follower")
     public void addFollower(@PathParam("id") int id, @QueryParam("followerid") int followerid) {
@@ -90,6 +128,11 @@ public class ProfileResource {
         prof.getFollowing().add(follower);
     }
     
+    /**
+     *
+     * @param id
+     * @param followerid
+     */
     @DELETE
     @Path("{id}/follower")
     public void removeFollower(@PathParam("id") int id, @QueryParam("followerid") int followerid) {
@@ -98,6 +141,10 @@ public class ProfileResource {
         prof.getFollowing().remove(follower);
     }
 
+    /**
+     *
+     * @param id
+     */
     @DELETE
     @Path("{id}")
     public void deleteProfile(@PathParam("id") int id) {

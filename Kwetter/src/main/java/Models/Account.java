@@ -5,6 +5,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ *
+ * @author Jorrit
+ */
 @Entity
 @NamedQueries({
         @NamedQuery(name = "account.findByname", query = "SELECT a FROM Account a WHERE a.userName = :userName"),
@@ -30,9 +34,19 @@ public class Account implements Serializable{
     @OneToOne(cascade = CascadeType.ALL)
     private Profile profile;
 
+    /**
+     *
+     */
     public Account() {
     }
 
+    /**
+     *
+     * @param userName
+     * @param email  
+     * @param rights
+     * @param hash
+     */
     public Account(String userName, String email, int rights, String hash) {
         this.userName = userName;
         this.email = email;
@@ -40,50 +54,98 @@ public class Account implements Serializable{
         this.hash = hash;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param accountId
+     */
     public void setId(long accountId) {
         this.id = accountId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     *
+     * @param userName
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getRights() {
         return rights;
     }
 
+    /**
+     *
+     * @param rights
+     */
     public void setRights(int rights) {
         this.rights = rights;
     }
 
+    /**
+     *
+     * @return
+     */
     public Profile getProfile() {
         return profile;
     }
 
+    /**
+     *
+     * @param prof
+     */
     public void setProfile(Profile prof) {
         profile = prof;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getHash() {
         return hash;
     }
 
+    /**
+     *
+     * @param hash
+     */
     public void setHash(String hash) {
         this.hash = hash;
     }

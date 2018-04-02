@@ -8,29 +8,53 @@ import javax.inject.Inject;
 import javax.ejb.Stateless;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Jorrit
+ */
 @Stateless
 public class ProfileService {
 
         @Inject @JPA
         private ProfileDao profileDao;
 
-        public void addprofile(Profile P) {
+    /**
+     *
+     * @param P
+     */
+    public void addprofile(Profile P) {
             profileDao.create(P);
         }
 
-        public void removeProfile(Profile P) {
+    /**
+     *
+     * @param P
+     */
+    public void removeProfile(Profile P) {
             profileDao.remove(P);
         }
 
-        public ArrayList<Profile> getProfiles() {
+    /**
+     *
+     * @return
+     */
+    public ArrayList<Profile> getProfiles() {
             return profileDao.getProfiles();
         }
         
-         public Profile findById(int id) {
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public Profile findById(int id) {
             return profileDao.find(id);
         }
 
-        public ProfileService() {
+    /**
+     *
+     */
+    public ProfileService() {
         }
 
     }

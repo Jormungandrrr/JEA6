@@ -30,12 +30,21 @@ public class MessageResource {
     @Inject
     private MessageService m;
 
+    /**
+     *
+     * @return
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Message> getAll() {
         return m.getMessages();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -44,12 +53,22 @@ public class MessageResource {
         return message;
     }
     
+    /**
+     *
+     * @param name
+     * @param content
+     */
     @PUT
     public void createmessage(@QueryParam("name") String name, @QueryParam("content") String content) {
         
         m.addMessage(new Message());
     }
     
+    /**
+     *
+     * @param id
+     * @param profileid
+     */
     @POST
     @Path("{id}")
     public void likemessage(@PathParam("id") int id, @QueryParam("profileid") String profileid) {

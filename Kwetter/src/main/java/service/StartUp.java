@@ -11,6 +11,10 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
+/**
+ *
+ * @author Jorrit
+ */
 @Singleton
 @Startup
 public class StartUp {
@@ -18,6 +22,9 @@ public class StartUp {
     @Inject
     private AccountService as;
 
+    /**
+     *
+     */
     public StartUp() {
     }
 

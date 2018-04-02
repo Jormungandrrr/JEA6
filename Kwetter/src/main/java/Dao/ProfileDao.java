@@ -20,14 +20,25 @@ import javax.persistence.TypedQuery;
 @Stateless @JPA
 public class ProfileDao extends DaoFacade<Profile> {
     
-     public ProfileDao() {
+    /**
+     *
+     */
+    public ProfileDao() {
         super(Profile.class);
     }
 
+    /**
+     *
+     * @return
+     */
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     * @return list of all profiles
+     */
     public ArrayList<Profile> getProfiles() {
         Query query = em.createQuery("SELECT p FROM Profile p");
         return  new ArrayList<>(query.getResultList());
