@@ -3,6 +3,7 @@ package service;
 import Models.Account;
 import Models.Message;
 import Models.Profile;
+import Models.Role;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class StartUp {
 
     @PostConstruct
     private void intData(){
-        Account test = new Account("test", "test@test.nl", 3, "test");
+        Account test = new Account("test", "test@test.nl", new Role("user"), "test");
         Profile testProfile = new Profile("testprofile","test test test", "test");
         List<Message> messages = new ArrayList<>();
         messages.add(new Message(testProfile, "init message"));

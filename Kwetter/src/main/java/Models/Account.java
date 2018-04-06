@@ -29,7 +29,8 @@ public class Account implements Serializable{
     
     private String hash;
 
-    private int rights;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Profile profile;
@@ -47,10 +48,10 @@ public class Account implements Serializable{
      * @param rights
      * @param hash
      */
-    public Account(String userName, String email, int rights, String hash) {
+    public Account(String userName, String email, Role role, String hash) {
         this.userName = userName;
         this.email = email;
-        this.rights = rights;
+        this.role = role;
         this.hash = hash;
     }
 
@@ -102,20 +103,12 @@ public class Account implements Serializable{
         this.email = email;
     }
 
-    /**
-     *
-     * @return
-     */
-    public int getRights() {
-        return rights;
+    public Role getRole() {
+        return role;
     }
 
-    /**
-     *
-     * @param rights
-     */
-    public void setRights(int rights) {
-        this.rights = rights;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     /**

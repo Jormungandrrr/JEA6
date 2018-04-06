@@ -66,6 +66,11 @@ public class AccountService {
      * @param username
      * @return
      */
+    
+    public void update(Account a){
+        accountDao.edit(a);
+    }
+    
     public boolean checkIfExists(String username) {
         return accountDao.checkIfExists(username);
     }

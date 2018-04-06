@@ -7,9 +7,9 @@ package beans;
 
 import Models.Account;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
@@ -21,7 +21,7 @@ import service.AccountService;
  * @author Jorrit
  */
 @Named(value = "login")
-@SessionScoped
+@ViewScoped
 public class LoginBean implements Serializable {
 
     private String username;

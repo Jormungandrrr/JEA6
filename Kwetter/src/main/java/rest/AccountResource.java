@@ -6,6 +6,7 @@
 package rest;
 
 import Models.Account;
+import Models.Role;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -62,7 +63,7 @@ public class AccountResource {
      */
     @PUT
     public void createAccount(@QueryParam("username") String username, @QueryParam("email") String email, @QueryParam("hash") String hash) {
-        a.addAccount(new Account(username, email, 3, hash));
+        a.addAccount(new Account(username, email, new Role("test"), hash));
     }
 
     /**
@@ -73,10 +74,10 @@ public class AccountResource {
      */
     @POST
     @Path("{username}")
-    public void updateAccount(@PathParam("username") String username,@QueryParam("email") String email, @QueryParam("rights") int rights) {
+    public void updateAccount(@PathParam("username") String username,@QueryParam("email") String email, @QueryParam("role") Role role) {
         Account acc = a.findByUserName(username);
         acc.setEmail(email);
-        acc.setRights(rights);
+        acc.setRole(role);
     }
 
     /**
