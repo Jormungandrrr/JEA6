@@ -80,17 +80,14 @@ public class LoginBean implements Serializable {
         this.account = account;
     }
 
-    public void login(ActionEvent event){
-        FacesMessage message = null;
-        boolean loggedIn = false;
+    public String login() {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 
         try {
             request.login(username, password);
         } catch (ServletException e) {
-            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
-            loggedIn = false;
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials"));
         }
 
         Principal principal = request.getUserPrincipal();
@@ -99,15 +96,12 @@ public class LoginBean implements Serializable {
         Map<String, Object> sessionMap = externalContext.getSessionMap();
         sessionMap.put("admin", account);
         if (request.isUserInRole("admin")) {
-            loggedIn = true;
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username));
+            return "home.xhtml?faces-redirect=true";
         } else {
-            loggedIn = false;
-            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials"));
+            return null;
         }
-
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        PrimeFaces.current().ajax().addCallbackParam("loggedIn", loggedIn);
     }
 
 }
