@@ -31,13 +31,20 @@ public class StartUp {
 
     @PostConstruct
     private void intData(){
-        Account test = new Account("test", "test@test.nl", new Role("user"), "test");
-        Profile testProfile = new Profile("testprofile","test test test", "test");
+        Account testadmin = new Account("testadmin", "test@test.nl", new Role("admin"),"test");
+        Profile testaAdminProfile = new Profile("testprofile","test test test", "test");
         List<Message> messages = new ArrayList<>();
-        messages.add(new Message(testProfile, "init message"));
-        testProfile.setMessages(messages);
-        testProfile.getMessages().add(new Message(testProfile, "test message"));
-        test.setProfile(testProfile);
-        as.addAccount(test);
+        messages.add(new Message(testaAdminProfile, "init message"));
+        testaAdminProfile.setMessages(messages);
+        testaAdminProfile.getMessages().add(new Message(testaAdminProfile, "test message"));
+        testadmin.setProfile(testaAdminProfile);
+        as.addAccount(testadmin);
+        
+        Account testuser = new Account("testuser", "test@test.nl", new Role("user"),"test");
+        Profile testUserProfile = new Profile("testprofile","test test test", "test");
+        testUserProfile.setMessages(messages);
+        testUserProfile.getMessages().add(new Message(testUserProfile, "test message"));
+        testadmin.setProfile(testUserProfile);
+        as.addAccount(testuser);
     }
 }

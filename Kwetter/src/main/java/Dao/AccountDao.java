@@ -36,7 +36,7 @@ public class AccountDao extends DaoFacade<Account> {
      */
     public Account findByName(String name) {
         TypedQuery<Account> query = em.createNamedQuery("account.findByname", Account.class);
-        query.setParameter("userName", name);
+        query.setParameter("username", name);
         List<Account> result = query.getResultList();
         return result.get(0);
     }
@@ -57,7 +57,7 @@ public class AccountDao extends DaoFacade<Account> {
      */
     public boolean checkIfExists(String name){
         Query query = em.createNamedQuery("account.checkIfExists", Account.class);
-        query.setParameter("userName", name);
+        query.setParameter("username", name);
         int count = ((Number)query.getSingleResult()).intValue();
         if (count == 0) {
             return false;

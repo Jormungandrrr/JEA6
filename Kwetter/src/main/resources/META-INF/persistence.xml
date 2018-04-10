@@ -5,6 +5,8 @@
              version="2.0">
     <persistence-unit name="KwetterPU" transaction-type="JTA">
         <jta-data-source>jdbc/Kwetter</jta-data-source>
+        <class>Models.Account</class>
+        <class>Models.Role</class>
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>

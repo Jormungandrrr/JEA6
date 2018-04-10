@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -22,7 +23,8 @@ import service.AccountService;
  * @author Jorrit
  */
 @Named(value = "admin")
-@ViewScoped
+@ManagedBean
+@SessionScoped
 public class AdminBean implements Serializable {
 
     @Inject

@@ -3,7 +3,12 @@ package Models;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
+import javax.xml.bind.DatatypeConverter;
+import service.AccountService;
 
 /**
  *
@@ -11,9 +16,9 @@ import java.util.Objects;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "account.findByname", query = "SELECT a FROM Account a WHERE a.userName = :userName"),
+        @NamedQuery(name = "account.findByname", query = "SELECT a FROM Account a WHERE a.username = :username"),
         @NamedQuery(name = "account.count", query = "SELECT COUNT(a) FROM Account a"),
-        @NamedQuery(name = "account.checkIfExists", query = "SELECT COUNT(a) FROM Account a Where a.userName = :userName")
+        @NamedQuery(name = "account.checkIfExists", query = "SELECT COUNT(a) FROM Account a Where a.username = :username")
 })
         
 @XmlRootElement
@@ -23,13 +28,15 @@ public class Account implements Serializable{
     @GeneratedValue
     private long id;
 
-    private String userName;
+    private String username;
 
     private String email;
     
-    private String hash;
+    private String password;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    //@ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "rolename", referencedColumnName = "name")
     private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -43,16 +50,16 @@ public class Account implements Serializable{
 
     /**
      *
-     * @param userName
+     * @param username
      * @param email  
      * @param rights
      * @param hash
      */
-    public Account(String userName, String email, Role role, String hash) {
-        this.userName = userName;
+    public Account(String username, String email, Role role, String password){
+        this.username = username;
         this.email = email;
         this.role = role;
-        this.hash = hash;
+        this.password = AccountService.hashPassword(password);
     }
 
     /**
@@ -75,16 +82,16 @@ public class Account implements Serializable{
      *
      * @return
      */
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     /**
      *
      * @param userName
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -127,20 +134,12 @@ public class Account implements Serializable{
         profile = prof;
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getHash() {
-        return hash;
+    public String getPassword() {
+        return password;
     }
 
-    /**
-     *
-     * @param hash
-     */
-    public void setHash(String hash) {
-        this.hash = hash;
+    public void setPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+         this.password = AccountService.hashPassword(password);
     }
 
     
@@ -163,6 +162,6 @@ public class Account implements Serializable{
             return false;
         }
         final Account other = (Account) obj;
-        return Objects.equals(this.userName, other.userName);
+        return Objects.equals(this.username, other.username);
     }
 }
