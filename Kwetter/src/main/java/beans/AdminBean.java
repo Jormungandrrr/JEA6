@@ -31,8 +31,7 @@ public class AdminBean implements Serializable {
     private AccountService as;
 
     private List<Account> accounts;
-    //private List<String> rights = Arrays.asList("admin", "moderator", "user");
-    private int[] rights = {1,2,3};
+    private List<String> roles = Arrays.asList("admin", "moderator", "user");
 
     @PostConstruct
     public void init() {
@@ -44,12 +43,8 @@ public class AdminBean implements Serializable {
        as.update(a);
     }
 
-    public int[] getRights() {
-        return rights;
-    }
-
-    public void setRights(int[] rights) {
-        this.rights = rights;
+    public List<String> getRoles() {
+        return roles;
     }
     
     public List<Account> getAccounts() {

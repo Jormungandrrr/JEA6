@@ -97,7 +97,7 @@ public class LoginBean implements Serializable {
         sessionMap.put("admin", account);
         if (request.isUserInRole("admin")) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username));
-            return "home.xhtml?faces-redirect=true";
+            return "admin.xhtml?faces-redirect=true";
         } else {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials"));
             return null;

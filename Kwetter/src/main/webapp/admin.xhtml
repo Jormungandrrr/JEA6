@@ -24,7 +24,7 @@
                 </p:column>
 
                 <p:column headerText="Username">
-                    <h:outputText value="#{account.userName}" />
+                    <h:outputText value="#{account.username}" />
                 </p:column>
 
                 <p:column headerText="Email">
@@ -32,13 +32,14 @@
                 </p:column>
 
                 <p:column headerText="Rights">
-                    <p:selectOneMenu value="#{account.rights}" style="width:150px">
-                        <f:selectItems value="#{admin.rights}"/>
+                    <p:selectOneMenu value="#{account.role}" style="width:150px">
+                        <f:selectItem itemLabel="#{account.role.name}" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{admin.roles}"/>
                     </p:selectOneMenu>
                 </p:column>
                 
                  <p:column headerText="">
-                     <p:commandButton value="Update" actionListener="#{admin.onRightChange(account, account.rights)}"/>
+                     <p:commandButton value="Update" actionListener="#{admin.onRightChange(account, account.role)}"/>
                 </p:column>
             </p:dataTable>
         </h:form>
