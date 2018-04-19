@@ -44,7 +44,7 @@ public class RoleService {
      * @return
      */
     public ArrayList<Role> getRoles() {
-            return roleDao.getProfiles();
+            return roleDao.getRoles();
         }
         
     /**

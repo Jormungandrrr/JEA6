@@ -31,10 +31,10 @@ public class RoleDao extends DaoFacade<Role>{
 
     /**
      *
-     * @return list of all profiles
+     * @return list of all roles
      */
-    public ArrayList<Role> getProfiles() {
-        Query query = em.createQuery("SELECT p FROM Profile p");
-        return  new ArrayList<>(query.getResultList());
+    public ArrayList<Role> getRoles() {
+        Query query = em.createQuery("SELECT r FROM Role r");
+        return new ArrayList<>(query.getResultList());
     }
 }

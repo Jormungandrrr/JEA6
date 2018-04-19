@@ -1,5 +1,6 @@
 package Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -32,6 +33,7 @@ public class Account implements Serializable{
 
     private String email;
     
+    @JsonIgnore
     private String password;
 
     //@ManyToOne(cascade = CascadeType.ALL)

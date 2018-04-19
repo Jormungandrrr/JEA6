@@ -8,15 +8,14 @@ package beans;
 import Models.Account;
 import Models.Role;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import service.AccountService;
+import service.RoleService;
 
 /**
  *
@@ -29,21 +28,25 @@ public class AdminBean implements Serializable {
 
     @Inject
     private AccountService as;
+    @Inject
+    private RoleService rs;
 
     private List<Account> accounts;
-    private List<String> roles = Arrays.asList("admin", "moderator", "user");
+    private List<Role> roles;
 
     @PostConstruct
     public void init() {
         accounts = as.getAccounts();
+        roles = rs.getRoles();
     }
     
-    public void onRightChange(Account a, Role role) {
-       a.setRole(role);
-       as.update(a);
+    public void onRoleChange() {
+       for(Account a : accounts){
+            as.update(a);
+       }
     }
 
-    public List<String> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
     

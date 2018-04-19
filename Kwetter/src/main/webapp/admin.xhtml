@@ -33,15 +33,12 @@
 
                 <p:column headerText="Rights">
                     <p:selectOneMenu value="#{account.role}" style="width:150px">
-                        <f:selectItem itemLabel="#{account.role.name}" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="#{account.role}" itemValue="" noSelectionOption="true" />
                         <f:selectItems value="#{admin.roles}"/>
                     </p:selectOneMenu>
                 </p:column>
-                
-                 <p:column headerText="">
-                     <p:commandButton value="Update" actionListener="#{admin.onRightChange(account, account.role)}"/>
-                </p:column>
             </p:dataTable>
+            <p:commandButton value="Update" actionListener="#{admin.onRoleChange}"/>
         </h:form>
     </h:body>
 </html>

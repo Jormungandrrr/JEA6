@@ -32,7 +32,7 @@ public class StartUp {
     @PostConstruct
     private void intData(){
         Account testadmin = new Account("testadmin", "test@test.nl", new Role("admin"),"test");
-        Profile testaAdminProfile = new Profile("testprofile","test test test", "test");
+        Profile testaAdminProfile = new Profile("testadminprofile","test test test", "test");
         List<Message> messages = new ArrayList<>();
         messages.add(new Message(testaAdminProfile, "init message"));
         testaAdminProfile.setMessages(messages);
@@ -41,10 +41,21 @@ public class StartUp {
         as.addAccount(testadmin);
         
         Account testuser = new Account("testuser", "test@test.nl", new Role("user"),"test");
-        Profile testUserProfile = new Profile("testprofile","test test test", "test");
-        testUserProfile.setMessages(messages);
+        Profile testUserProfile = new Profile("testuserprofile","test test test", "test");
+        List<Message> usermessages = new ArrayList<>();
+        usermessages.add(new Message(testaAdminProfile, "init message"));
+        testUserProfile.setMessages(usermessages);
         testUserProfile.getMessages().add(new Message(testUserProfile, "test message"));
-        testadmin.setProfile(testUserProfile);
+        testuser.setProfile(testUserProfile);
         as.addAccount(testuser);
+        
+        Account testModerator = new Account("testmoderator", "test@test.nl", new Role("moderator"),"test");
+        Profile testModeratorProfile = new Profile("testmoderatorprofile","test test test", "test");
+        List<Message> moderatormessages = new ArrayList<>();
+        moderatormessages.add(new Message(testaAdminProfile, "init message"));
+        testModeratorProfile.setMessages(moderatormessages);
+        testModeratorProfile.getMessages().add(new Message(testModeratorProfile, "test message"));
+        testModerator.setProfile(testModeratorProfile);
+        as.addAccount(testModerator);
     }
 }

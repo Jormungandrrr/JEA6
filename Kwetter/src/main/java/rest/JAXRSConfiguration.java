@@ -10,7 +10,7 @@ import javax.ws.rs.core.Application;
 
 /**
  *
- * @author jeroen
+ * @author Jorrit
  */
 @ApplicationPath("api")
 public class JAXRSConfiguration extends Application {
