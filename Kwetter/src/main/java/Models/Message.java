@@ -21,16 +21,16 @@ public class Message implements Serializable {
 
     @Column(name = "content")
     private String content;
-
-    @Column(name = "likes")
-    private int likes;
-
-    @Column(name = "dislike")
-    private int dislike;
+    
+    @Column(name = "poster")
+    private String poster;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profileId")
     private Profile owner;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Profile> likes;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Profile> mentions;
@@ -52,6 +52,7 @@ public class Message implements Serializable {
     public Message(Profile owner, String content) {
         this.content = content;
         this.owner = owner;
+        this.poster = this.owner.getName();
     }
 
     /**
@@ -66,6 +67,7 @@ public class Message implements Serializable {
         this.owner = owner;
         this.mentions = mentions;
         this.tags = tags;
+        this.poster = this.owner.getName();
     }
 
     /**
@@ -136,7 +138,7 @@ public class Message implements Serializable {
      *
      * @return
      */
-    public int getLikes() {
+    public List<Profile> getLikes() {
         return likes;
     }
 
@@ -144,9 +146,18 @@ public class Message implements Serializable {
      *
      * @param likes
      */
-    public void setLikes(int likes) {
+    public void setLikes(List<Profile> likes) {
         this.likes = likes;
     }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+    
     
     
 }

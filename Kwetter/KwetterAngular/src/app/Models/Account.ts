@@ -1,10 +1,11 @@
 import { Profile } from './Profile';
+import {Role} from './Role';
 
 export class Account {
   id: number;
   username: string;
   email: string;
-  role: string;
+  role: Role;
   profile: Profile;
 
   constructor(id, username, email, role, profile) {

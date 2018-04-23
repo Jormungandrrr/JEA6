@@ -6,6 +6,7 @@
 package rest;
 
 import Models.Message;
+import Models.Profile;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -18,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import service.MessageService;
+import service.ProfileService;
 
 /**
  *
@@ -29,6 +31,8 @@ public class MessageResource {
 
     @Inject
     private MessageService m;
+    @Inject
+    private ProfileService p;
 
     /**
      *
@@ -71,9 +75,12 @@ public class MessageResource {
      */
     @POST
     @Path("{id}")
-    public void likemessage(@PathParam("id") int id, @QueryParam("profileid") String profileid) {
+    public void likemessage(@PathParam("id") int id, @QueryParam("profileid") long profileid) {
          Message message = m.findById(id);
-         message.setLikes(message.getLikes() + 1);
+         Profile prof = p.findById(profileid);
+         List<Profile> likes = message.getLikes();
+         likes.add(prof);
+         message.setLikes(likes);
     }
     
 }

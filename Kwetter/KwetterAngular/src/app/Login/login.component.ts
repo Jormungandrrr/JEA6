@@ -19,7 +19,7 @@ export class LoginComponent {
    this.loginService.Login(this.username, this.password).subscribe(data => {
      if (data != null) {
        localStorage.setItem('email', data.email);
-       localStorage.setItem('role', data.role);
+       localStorage.setItem('role', data.role.name);
        localStorage.setItem('profileId', data.profile.id.toString());
        localStorage.setItem('loggedIn', String(true));
        this.router.navigate(['/profile/', data.username]);

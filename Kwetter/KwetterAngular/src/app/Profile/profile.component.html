@@ -1,12 +1,13 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div *ngIf="profile!=null" class="w3-content w3-margin-top" style="max-width:1400px;">
   <div class="w3-row-padding">
-    <div class="w3-third">
+    <div class="w3-quarter">
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-container">
           <img src="{{profile.photo}}" style="width:100%" alt="Avatar">
           <div class="w3-container w3-text-black">
-            <h2>{{profile.name}}</h2>
+            <h2 style="text-align: center">{{profile.name}}</h2>
           </div>
         </div>
         <div class="w3-container">
@@ -15,6 +16,7 @@
           <p style="font-weight: bold">Location:</p>
           <p>{{profile.location}}</p>
           <hr>
+          <p><i  *ngIf="currentUserId != profile.id" class="fa fa-user-plus" aria-hidden="true"></i>  <i *ngIf="currentUserId != profile.id" class="fa fa-user-times" aria-hidden="true"></i></p>
       </div>
       </div>
     </div>
@@ -23,8 +25,9 @@
         <h2 class="w3-text-grey w3-padding-16"><i class="fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Timeline</h2>
         <div class="w3-container">
           <ng-container *ngFor="let message of profile.messages">
-            <h5 class="w3-opacity"><b>Message</b></h5>
+            <h5 class="w3-opacity"><b>{{message.poster}}</b></h5>
             <p>{{message.content}}</p>
+            <p><i *ngIf="currentUserId != profile.id" class="fa fa-thumbs-o-up" aria-hidden="true"></i>  <i *ngIf="role==='moderator'|| role === 'admin'" class="fa fa-exclamation-triangle" aria-hidden="true"></i></p>
             <hr>
           </ng-container>
           <div *ngIf="loggedIn">
