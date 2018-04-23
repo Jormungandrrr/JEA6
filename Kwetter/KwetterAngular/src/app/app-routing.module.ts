@@ -3,10 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import {ProfileComponent} from './Profile/profile.component';
 import {LoginComponent} from './Login/login.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
-  { path: 'profile', component: ProfileComponent}
+  { path: 'profile/:username', component: ProfileComponent}
+];
+
+export const appRoutingProviders: any[] = [
+
 ];
 
 @NgModule({

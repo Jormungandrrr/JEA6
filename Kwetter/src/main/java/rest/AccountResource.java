@@ -6,6 +6,7 @@
 package rest;
 
 import Models.Account;
+import Models.Profile;
 import Models.Role;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -53,6 +54,19 @@ public class AccountResource {
     public Account getAccount(@PathParam("username") String username) {
         Account acc = a.findByUserName(username);
         return acc;
+    }
+    
+     /**
+     *
+     * @param username
+     * @return
+     */
+    @GET
+    @Path("{username}/profile")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Profile getProfile(@PathParam("username") String username) {
+        Account acc = a.findByUserName(username);
+        return acc.getProfile();
     }
 
     /**

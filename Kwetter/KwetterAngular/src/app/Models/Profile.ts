@@ -5,6 +5,8 @@ export class Profile {
   following: Profile[];
   id: number;
   location: string;
+  photo: string;
+  website: string;
   messages: Message[];
   name: string;
 

@@ -1,3 +1,39 @@
-<div style="text-align:center">
-  <h1>Insert profile here</h1>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<div *ngIf="profile!=null" class="w3-content w3-margin-top" style="max-width:1400px;">
+  <div class="w3-row-padding">
+    <div class="w3-third">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+          <img src="{{profile.photo}}" style="width:100%" alt="Avatar">
+          <div class="w3-container w3-text-black">
+            <h2>{{profile.name}}</h2>
+          </div>
+        </div>
+        <div class="w3-container">
+          <p style="font-weight: bold">Biography:</p>
+          <p>{{profile.biography}}</p>
+          <p style="font-weight: bold">Location:</p>
+          <p>{{profile.location}}</p>
+          <hr>
+      </div>
+      </div>
+    </div>
+    <div class="w3-twothird">
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Timeline</h2>
+        <div class="w3-container">
+          <ng-container *ngFor="let message of profile.messages">
+            <h5 class="w3-opacity"><b>Message</b></h5>
+            <p>{{message.content}}</p>
+            <hr>
+          </ng-container>
+          <h5 class="w3-opacity"><b>Place Message</b></h5>
+          <input type="text" name="message" [(ngModel)]="content" placeholder="Message" required>
+          <input type="submit" value="place" (click)="PlaceMessage()">
+          <hr>
+        </div>
+    </div>
+  </div>
 </div>
+</div>
+<!-- bron https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_cv&stacked=h -->

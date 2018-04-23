@@ -33,6 +33,7 @@ public class StartUp {
     private void intData(){
         Account testadmin = new Account("testadmin", "test@test.nl", new Role("admin"),"test");
         Profile testaAdminProfile = new Profile("testadminprofile","test test test", "test");
+        testaAdminProfile.setPhoto("https://static2.fjcdn.com/comments/Dickbut+for+everybody+zentertainments+gets+a+dickbut+_fc88e4d586c873f470964fab580a9518.jpg");
         List<Message> messages = new ArrayList<>();
         messages.add(new Message(testaAdminProfile, "init message"));
         testaAdminProfile.setMessages(messages);
@@ -42,6 +43,7 @@ public class StartUp {
         
         Account testuser = new Account("testuser", "test@test.nl", new Role("user"),"test");
         Profile testUserProfile = new Profile("testuserprofile","test test test", "test");
+        testUserProfile.setPhoto("https://static2.fjcdn.com/comments/Dickbut+for+everybody+zentertainments+gets+a+dickbut+_fc88e4d586c873f470964fab580a9518.jpg");
         List<Message> usermessages = new ArrayList<>();
         usermessages.add(new Message(testaAdminProfile, "init message"));
         testUserProfile.setMessages(usermessages);
@@ -51,6 +53,7 @@ public class StartUp {
         
         Account testModerator = new Account("testmoderator", "test@test.nl", new Role("moderator"),"test");
         Profile testModeratorProfile = new Profile("testmoderatorprofile","test test test", "test");
+        testModeratorProfile.setPhoto("https://static2.fjcdn.com/comments/Dickbut+for+everybody+zentertainments+gets+a+dickbut+_fc88e4d586c873f470964fab580a9518.jpg");
         List<Message> moderatormessages = new ArrayList<>();
         moderatormessages.add(new Message(testaAdminProfile, "init message"));
         testModeratorProfile.setMessages(moderatormessages);
