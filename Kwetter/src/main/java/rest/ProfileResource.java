@@ -11,6 +11,7 @@ import Models.Profile;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -97,9 +98,11 @@ public class ProfileResource {
      */
     @POST
     @Path("{id}/message")
-    public void addMessage(@PathParam("id") int id, @QueryParam("content") String content) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addMessage(@PathParam("id") long id, @QueryParam("ownerid") long ownerid, @QueryParam("content") String content) {
         Profile prof = p.findById(id);
-        prof.getMessages().add(new Message(prof, content));
+        Profile owner = p.findById(ownerid);
+        prof.getMessages().add(new Message(owner, content));
     }
     
     /**

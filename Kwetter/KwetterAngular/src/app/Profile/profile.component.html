@@ -27,10 +27,12 @@
             <p>{{message.content}}</p>
             <hr>
           </ng-container>
+          <div *ngIf="loggedIn">
           <h5 class="w3-opacity"><b>Place Message</b></h5>
           <input type="text" name="message" [(ngModel)]="content" placeholder="Message" required>
           <input type="submit" value="place" (click)="PlaceMessage()">
           <hr>
+          </div>
         </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import {Account} from './../Models/Account';
@@ -12,6 +12,9 @@ export class LoginService {
   }
 
   Login(username: string, password: string): Observable<Account> {
-    return this.http.get<Account>(this.apiUrl + '?username=' + username + '&password=' + password);
+    let Params = new HttpParams();
+    Params = Params.append('username', username);
+    Params = Params.append('password', password);
+    return this.http.get<Account>(this.apiUrl, { params: Params });
   }
 }

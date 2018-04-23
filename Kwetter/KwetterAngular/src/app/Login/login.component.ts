@@ -9,10 +9,8 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent {
-  title = 'Login';
   username;
   password;
-
 
   constructor(private loginService: LoginService, private router: Router ) {
   }
@@ -20,6 +18,10 @@ export class LoginComponent {
   Login() {
    this.loginService.Login(this.username, this.password).subscribe(data => {
      if (data != null) {
+       localStorage.setItem('email', data.email);
+       localStorage.setItem('role', data.role);
+       localStorage.setItem('profileId', data.profile.id.toString());
+       localStorage.setItem('loggedIn', String(true));
        this.router.navigate(['/profile/', data.username]);
      }
    });

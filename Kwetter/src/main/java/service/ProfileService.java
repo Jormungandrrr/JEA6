@@ -47,7 +47,7 @@ public class ProfileService {
      * @param id
      * @return
      */
-    public Profile findById(int id) {
+    public Profile findById(long id) {
             return profileDao.find(id);
         }
 
