@@ -83,4 +83,19 @@ public class MessageResource {
          message.setLikes(likes);
     }
     
+    /**
+     *
+     * @param id
+     * @param profileid
+     */
+    @POST
+    @Path("{id}")
+    public void flagmessage(@PathParam("id") int id, @QueryParam("profileid") long profileid) {
+//         Message message = m.findById(id);
+//         Profile prof = p.findById(profileid);
+//         List<Profile> likes = message();
+//         likes.add(prof);
+//         message.setLikes(likes);
+    }
+    
 }

@@ -3,6 +3,7 @@ import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import {Profile} from './../Models/Profile';
+import {Message} from './../Models/Message';
 
 @Injectable()
 export class ProfileService {
@@ -25,6 +26,32 @@ export class ProfileService {
       headers,
       params
     };
-    return this.http.post(this.apiUrl + profileID + '/message', null, options);
+    return this.http.post<Message>(this.apiUrl + profileID + '/message', null, options);
+  }
+
+  LikeProfile(followerID: number, profileID: number) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    const params = new HttpParams()
+      .set('followerid', followerID.toString())
+    const options = {
+      headers,
+      params
+    };
+    return this.http.post<Profile>(this.apiUrl + profileID + '/follower', null, options);
+  }
+
+  UnLikeProfile(followerID: number, profileID: number) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    const params = new HttpParams()
+      .set('followerid', followerID.toString())
+    const options = {
+      headers,
+      params
+    };
+    return this.http.delete<Profile>(this.apiUrl + profileID + '/follower', options);
   }
 }

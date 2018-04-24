@@ -8,11 +8,12 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from './Services/LoginService';
 import {ProfileService} from './Services/ProfileService';
+import {MessageService} from './Services/MessageService';
 
 @NgModule({
   declarations: [AppComponent, ProfileComponent, LoginComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [LoginService, ProfileService],
+  providers: [LoginService, ProfileService, MessageService],
   bootstrap: [AppComponent],
 })
 

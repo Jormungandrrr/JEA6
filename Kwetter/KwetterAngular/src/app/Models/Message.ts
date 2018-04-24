@@ -7,6 +7,8 @@ export class Message {
   mentions: any[];
   tags: any[];
   poster: string;
+  posterImage: string;
+  posterId: number;
 
 
   constructor(content: string) {

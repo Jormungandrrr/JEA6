@@ -5,7 +5,6 @@
  */
 package rest;
 
-import Models.Account;
 import Models.Message;
 import Models.Profile;
 import java.util.List;
@@ -21,7 +20,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import service.AccountService;
 import service.MessageService;
 import service.ProfileService;
 
@@ -99,10 +97,13 @@ public class ProfileResource {
     @POST
     @Path("{id}/message")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addMessage(@PathParam("id") long id, @QueryParam("ownerid") long ownerid, @QueryParam("content") String content) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Message addMessage(@PathParam("id") long id, @QueryParam("ownerid") long ownerid, @QueryParam("content") String content) {
         Profile prof = p.findById(id);
         Profile owner = p.findById(ownerid);
-        prof.getMessages().add(new Message(owner, content));
+        Message msg = new Message(owner, content);
+        prof.getMessages().add(msg);
+        return msg;
     }
     
     /**
@@ -125,10 +126,13 @@ public class ProfileResource {
      */
     @POST
     @Path("{id}/follower")
-    public void addFollower(@PathParam("id") int id, @QueryParam("followerid") int followerid) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Profile addFollower(@PathParam("id") int id, @QueryParam("followerid") int followerid) {
         Profile prof = p.findById(id);
         Profile follower = p.findById(followerid);
         prof.getFollowing().add(follower);
+        return follower;
     }
     
     /**
@@ -137,11 +141,14 @@ public class ProfileResource {
      * @param followerid
      */
     @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}/follower")
-    public void removeFollower(@PathParam("id") int id, @QueryParam("followerid") int followerid) {
+    public Profile removeFollower(@PathParam("id") int id, @QueryParam("followerid") int followerid) {
         Profile prof = p.findById(id);
         Profile follower = p.findById(followerid);
         prof.getFollowing().remove(follower);
+        return follower;
     }
 
     /**

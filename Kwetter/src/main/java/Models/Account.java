@@ -1,14 +1,11 @@
 package Models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
-import javax.xml.bind.DatatypeConverter;
 import service.AccountService;
 
 /**
@@ -33,10 +30,8 @@ public class Account implements Serializable{
 
     private String email;
     
-    @JsonIgnore
     private String password;
 
-    //@ManyToOne(cascade = CascadeType.ALL)
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "rolename", referencedColumnName = "name")
     private Role role;

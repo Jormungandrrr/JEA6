@@ -2,8 +2,13 @@ package Models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.inject.Inject;
 import javax.xml.bind.annotation.XmlRootElement;
+import service.ProfileService;
 
 /**
  *
@@ -22,8 +27,14 @@ public class Message implements Serializable {
     @Column(name = "content")
     private String content;
     
+    @Column(name = "posterid")
+    private long posterId;
+    
     @Column(name = "poster")
     private String poster;
+    
+    @Column(name = "posterImage")
+    private String posterImage;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profileId")
@@ -37,7 +48,7 @@ public class Message implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tag> tags;
-
+    
     /**
      *
      */
@@ -52,7 +63,10 @@ public class Message implements Serializable {
     public Message(Profile owner, String content) {
         this.content = content;
         this.owner = owner;
-        this.poster = this.owner.getName();
+        this.posterId = owner.getId();
+        this.poster = owner.getName();
+        this.posterImage = owner.getPhoto();
+        this.tags = getTagsFromMessage(content);
     }
 
     /**
@@ -68,6 +82,8 @@ public class Message implements Serializable {
         this.mentions = mentions;
         this.tags = tags;
         this.poster = this.owner.getName();
+        this.posterImage = this.owner.getPhoto();
+        this.posterId = this.owner.getId();
     }
 
     /**
@@ -157,7 +173,41 @@ public class Message implements Serializable {
     public void setPoster(String poster) {
         this.poster = poster;
     }
+
+    public String getPosterImage() {
+        return posterImage;
+    }
+
+    public void setPosterImage(String posterImage) {
+        this.posterImage = posterImage;
+    }
+
+    public long getPosterId() {
+        return posterId;
+    }
+
+    public void setPosterId(long posterid) {
+        this.posterId = posterid;
+    }
     
-    
+     private List<Tag> getTagsFromMessage(String message) {
+        Pattern MY_PATTERN = Pattern.compile("#(\\S+)");
+        Matcher mat = MY_PATTERN.matcher(message);
+        ArrayList<Tag> hashTags = new ArrayList<Tag>();
+        while (mat.find()) {
+            hashTags.add(new Tag(mat.group(1)));
+        }
+        return hashTags;
+    }
+     
+//    public List<Profile> getMentionsFromMessage(String message) {
+//        Pattern MY_PATTERN = Pattern.compile("@(\\S+)");
+//        Matcher mat = MY_PATTERN.matcher(message);
+//        ArrayList<Profile> mentions = new ArrayList<Profile>();
+//        while (mat.find()) {
+//             mentions.add(p.findByName(mat.group(1)));
+//        }
+//        return mentions;
+//    }
     
 }

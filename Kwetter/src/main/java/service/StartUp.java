@@ -53,7 +53,7 @@ public class StartUp {
         
         Account testModerator = new Account("testmoderator", "test@test.nl", new Role("moderator"),"test");
         Profile testModeratorProfile = new Profile("Mod hans","test test test", "test");
-        testModeratorProfile.setPhoto("https://static2.fjcdn.com/comments/Dickbut+for+everybody+zentertainments+gets+a+dickbut+_fc88e4d586c873f470964fab580a9518.jpg");
+        testModeratorProfile.setPhoto("https://i.pinimg.com/736x/2c/9d/07/2c9d0704ae49dfde914e2b477bf9279c--stick-figure-profile-pictures.jpg");
         List<Message> moderatormessages = new ArrayList<>();
         moderatormessages.add(new Message(testaAdminProfile, "init message"));
         testModeratorProfile.setMessages(moderatormessages);

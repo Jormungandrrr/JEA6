@@ -19,6 +19,10 @@ public class Tag implements Serializable{
     @Column(name = "description")
     private String description;
 
+    public Tag(String name) {
+        this.name = name;
+    }
+    
     /**
      *
      */
