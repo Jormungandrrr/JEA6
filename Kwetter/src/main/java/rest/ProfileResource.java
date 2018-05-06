@@ -110,6 +110,7 @@ public class ProfileResource {
     public Message addMessage(@PathParam("id") long id, @QueryParam("ownerid") long ownerid, @QueryParam("content") String content, @Context  HttpHeaders headers) {
         String token = headers.getHeaderString("AUTHORIZATION").substring("Bearer".length()).trim();
         String accountName = Jwts.parser().setSigningKey(kg.generateKey()).parseClaimsJws(token).getBody().getSubject();
+        Profile tokenProfile = p.findByUsername(accountName);
         Profile prof = p.findById(id);
         Profile owner = p.findById(ownerid);
         Message msg = new Message(owner, content);

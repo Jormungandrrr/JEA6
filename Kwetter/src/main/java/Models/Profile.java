@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
         @NamedQuery(name = "profile.count", query = "SELECT COUNT(p) FROM Profile p"),
         @NamedQuery(name = "profile.findByname", query = "SELECT p FROM Profile p WHERE p.name = :name"),
+        @NamedQuery(name = "profile.findByUsername", query = "SELECT p FROM Profile p JOIN Account a ON p.id = a.profile.id WHERE a.username = :username")
 })
 @XmlRootElement
 public class Profile implements Serializable{

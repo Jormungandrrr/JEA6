@@ -51,8 +51,12 @@ public class ProfileService {
             return profileDao.find(id);
         }
 
-     public Profile findByName(String name) {
+    public Profile findByName(String name) {
         return profileDao.findByName(name);
+    }
+    
+    public Profile findByUsername(String username) {
+        return profileDao.findByUsername(username);
     }
     /**
      *

@@ -50,4 +50,11 @@ public class ProfileDao extends DaoFacade<Profile> {
         List<Profile> result = query.getResultList();
         return result.get(0);
     }
+    
+     public Profile findByUsername(String username) {
+        TypedQuery<Profile> query = em.createNamedQuery("profile.findByUsername", Profile.class);
+        query.setParameter("username", username);
+        List<Profile> result = query.getResultList();
+        return result.get(0);
+    }
 }
