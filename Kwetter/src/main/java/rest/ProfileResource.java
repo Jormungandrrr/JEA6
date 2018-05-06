@@ -7,7 +7,10 @@ package rest;
 
 import Models.Message;
 import Models.Profile;
+import io.jsonwebtoken.Jwts;
+import java.security.Key;
 import java.util.List;
+import javax.crypto.spec.SecretKeySpec;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -19,7 +22,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import service.KeyGenerator;
 import service.MessageService;
 import service.ProfileService;
 
@@ -36,6 +42,9 @@ public class ProfileResource {
     
     @Inject
     private MessageService m;
+    
+    @Inject
+    private KeyGenerator kg;
 
     /**
      *
@@ -98,7 +107,9 @@ public class ProfileResource {
     @Path("{id}/message")
     @Produces(MediaType.APPLICATION_JSON)
     @JWTToken
-    public Message addMessage(@PathParam("id") long id, @QueryParam("ownerid") long ownerid, @QueryParam("content") String content) {
+    public Message addMessage(@PathParam("id") long id, @QueryParam("ownerid") long ownerid, @QueryParam("content") String content, @Context  HttpHeaders headers) {
+        String token = headers.getHeaderString("AUTHORIZATION").substring("Bearer".length()).trim();
+        String accountName = Jwts.parser().setSigningKey(kg.generateKey()).parseClaimsJws(token).getBody().getSubject();
         Profile prof = p.findById(id);
         Profile owner = p.findById(ownerid);
         Message msg = new Message(owner, content);
