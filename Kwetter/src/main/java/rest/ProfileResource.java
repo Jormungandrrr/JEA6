@@ -96,8 +96,8 @@ public class ProfileResource {
      */
     @POST
     @Path("{id}/message")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @JWTToken
     public Message addMessage(@PathParam("id") long id, @QueryParam("ownerid") long ownerid, @QueryParam("content") String content) {
         Profile prof = p.findById(id);
         Profile owner = p.findById(ownerid);
@@ -126,7 +126,6 @@ public class ProfileResource {
      */
     @POST
     @Path("{id}/follower")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Profile addFollower(@PathParam("id") int id, @QueryParam("followerid") int followerid) {
         Profile prof = p.findById(id);
@@ -141,7 +140,6 @@ public class ProfileResource {
      * @param followerid
      */
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}/follower")
     public Profile removeFollower(@PathParam("id") int id, @QueryParam("followerid") int followerid) {

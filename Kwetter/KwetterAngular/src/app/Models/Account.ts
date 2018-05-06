@@ -7,6 +7,7 @@ export class Account {
   email: string;
   role: Role;
   profile: Profile;
+  token: string;
 
   constructor(id, username, email, role, profile) {
     this.id = id;

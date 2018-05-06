@@ -31,6 +31,8 @@ public class Account implements Serializable{
     private String email;
     
     private String password;
+    
+    private String token;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "rolename", referencedColumnName = "name")
@@ -139,7 +141,14 @@ public class Account implements Serializable{
          this.password = AccountService.hashPassword(password);
     }
 
-    
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;

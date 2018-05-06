@@ -17,7 +17,8 @@ export class ProfileService {
 
   placeMessage(PosterID: number, profileID: number, message: string) {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
     const params = new HttpParams()
       .set('ownerid', PosterID.toString())
@@ -34,7 +35,7 @@ export class ProfileService {
       'Content-Type': 'application/json'
     });
     const params = new HttpParams()
-      .set('followerid', followerID.toString())
+      .set('followerid', followerID.toString());
     const options = {
       headers,
       params
@@ -47,7 +48,7 @@ export class ProfileService {
       'Content-Type': 'application/json'
     });
     const params = new HttpParams()
-      .set('followerid', followerID.toString())
+      .set('followerid', followerID.toString());
     const options = {
       headers,
       params

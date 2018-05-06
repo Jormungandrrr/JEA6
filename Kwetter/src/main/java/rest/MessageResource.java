@@ -64,7 +64,6 @@ public class MessageResource {
      */
     @PUT
     public void createmessage(@QueryParam("name") String name, @QueryParam("content") String content) {
-        
         m.addMessage(new Message());
     }
     
@@ -74,7 +73,7 @@ public class MessageResource {
      * @param profileid
      */
     @POST
-    @Path("{id}")
+    @Path("{id}/like")
     public void likemessage(@PathParam("id") int id, @QueryParam("profileid") long profileid) {
          Message message = m.findById(id);
          Profile prof = p.findById(profileid);
@@ -89,7 +88,7 @@ public class MessageResource {
      * @param profileid
      */
     @POST
-    @Path("{id}")
+    @Path("{id}/flag")
     public void flagmessage(@PathParam("id") int id, @QueryParam("profileid") long profileid) {
 //         Message message = m.findById(id);
 //         Profile prof = p.findById(profileid);
