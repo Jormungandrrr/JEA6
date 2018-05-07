@@ -76,8 +76,8 @@ public class AccountService {
         accountDao.edit(a);
     }
 
-    public boolean checkIfExists(String username) {
-        return accountDao.checkIfExists(username);
+    public Account login(String username, String password) {
+        return accountDao.login(username, hashPassword(password));
     }
     /**
     * Returns SHA-256 encoded string

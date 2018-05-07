@@ -16,14 +16,14 @@ import service.AccountService;
 @NamedQueries({
         @NamedQuery(name = "account.findByname", query = "SELECT a FROM Account a WHERE a.username = :username"),
         @NamedQuery(name = "account.count", query = "SELECT COUNT(a) FROM Account a"),
-        @NamedQuery(name = "account.checkIfExists", query = "SELECT COUNT(a) FROM Account a Where a.username = :username")
+        @NamedQuery(name = "account.login", query = "SELECT a FROM Account a Where a.username = :username AND a.password = :password")
 })
         
 @XmlRootElement
 public class Account implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String username;

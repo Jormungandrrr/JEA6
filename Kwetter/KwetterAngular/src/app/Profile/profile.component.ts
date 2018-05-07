@@ -54,6 +54,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  UpdateProfile() {
+    this.profileService.UpdateProfile(this.profile).subscribe();
+  }
+
   LikeMessage() {
   }
 

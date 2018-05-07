@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Profile implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
     @Column(name = "name")

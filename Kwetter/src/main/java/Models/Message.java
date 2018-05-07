@@ -21,7 +21,7 @@ import service.ProfileService;
 public class Message implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "content")

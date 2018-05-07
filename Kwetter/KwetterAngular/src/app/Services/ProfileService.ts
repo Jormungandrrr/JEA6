@@ -55,4 +55,20 @@ export class ProfileService {
     };
     return this.http.delete<Profile>(this.apiUrl + profileID + '/follower', options);
   }
+
+  UpdateProfile(profile: Profile) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    const params = new HttpParams()
+      .set('biography', profile.biography)
+      .set('location', profile.location)
+      .set('photo', profile.photo)
+      .set('website', profile.website);
+    const options = {
+      headers,
+      params
+    };
+    return this.http.post<Profile>(this.apiUrl + profile.id, null, options);
+  }
 }

@@ -7,14 +7,23 @@
         <div class="w3-container">
           <img src="{{profile.photo}}" style="width:100%" alt="Avatar">
           <div class="w3-container w3-text-black">
+            <hr>
             <h2 style="text-align: center">{{profile.name}}</h2>
+            <hr>
           </div>
         </div>
         <div class="w3-container">
           <p style="font-weight: bold">Biography:</p>
-          <p>{{profile.biography}}</p>
+          <p *ngIf="profile.id != currentUserId">{{profile.biography}}</p>
+          <input *ngIf="profile.id == currentUserId" type="text" name="biography" [(ngModel)]="profile.biography" placeholder="{{profile.biography}}">
           <p style="font-weight: bold">Location:</p>
-          <p>{{profile.location}}</p>
+          <p *ngIf="profile.id != currentUserId">{{profile.location}}</p>
+          <input *ngIf="profile.id == currentUserId" type="text" name="biography" [(ngModel)]="profile.location" placeholder="{{profile.location}}">
+          <p style="font-weight: bold">Website:</p>
+          <p *ngIf="profile.id != currentUserId">{{profile.website}}</p>
+          <input *ngIf="profile.id == currentUserId" type="text" name="biography" [(ngModel)]="profile.website" placeholder="{{profile.website}}">
+          <hr>
+          <input *ngIf="profile.id == currentUserId" type="submit" value="Update Profile" (click)="UpdateProfile()">
           <hr>
           <p><i *ngIf="currentUserId != profile.id" class="fa fa-user-plus" aria-hidden="true" (click)="LikeProfile()"></i>  <i *ngIf="currentUserId != profile.id" class="fa fa-user-times" aria-hidden="true" (click)="UnLikeProfile()"></i></p>
           <p style="font-weight: bold">Following</p>

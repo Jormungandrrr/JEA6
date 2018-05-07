@@ -55,15 +55,11 @@ public class AccountDao extends DaoFacade<Account> {
      * @param name username
      * @return true if the username exists in the database
      */
-    public boolean checkIfExists(String name){
-        Query query = em.createNamedQuery("account.checkIfExists", Account.class);
-        query.setParameter("username", name);
-        int count = ((Number)query.getSingleResult()).intValue();
-        if (count == 0) {
-            return false;
-        }
-        else {
-            return true;
-        }
+    public Account login(String name, String password){
+        Query query = em.createNamedQuery("account.login", Account.class)
+        .setParameter("username", name)
+        .setParameter("password", password);
+        List<Account> result = query.getResultList();
+        return result.get(0);
     }
 }
