@@ -158,7 +158,7 @@ public class ProfileResource {
         Profile prof = p.findById(id);
         Profile follower = p.findById(followerid);
         prof.getFollowing().remove(follower);
-        return follower;
+        return prof;
     }
 
     /**

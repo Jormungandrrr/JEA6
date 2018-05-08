@@ -25,8 +25,10 @@
           <hr>
           <input *ngIf="profile.id == currentUserId" type="submit" value="Update Profile" (click)="UpdateProfile()">
           <hr>
-          <p><i *ngIf="currentUserId != profile.id" class="fa fa-user-plus" aria-hidden="true" (click)="LikeProfile()"></i>  <i *ngIf="currentUserId != profile.id" class="fa fa-user-times" aria-hidden="true" (click)="UnLikeProfile()"></i></p>
-          <p style="font-weight: bold">Following</p>
+          <p>
+            <i *ngIf="currentUserId != profile.id" class="fa fa-user-plus" aria-hidden="true" (click)="LikeProfile()"></i>
+            <i *ngIf="currentUserId != profile.id" class="fa fa-user-times" aria-hidden="true" (click)="UnLikeProfile()"></i></p>
+          <p style="font-weight: bold">Followers</p>
           <ng-container *ngFor="let follower of profile.following">
             <p><img src="{{follower.photo}}" style="width:5%">{{follower.name}}</p>
           </ng-container>
@@ -40,7 +42,12 @@
           <ng-container *ngFor="let message of profile.messages">
             <h5 class="w3-opacity"><b><img src="{{message.posterImage}}" style="width:5%">{{message.poster}}</b></h5>
             <p>{{message.content}}</p>
-            <p><i *ngIf="currentUserId != message.posterId" class="fa fa-thumbs-o-up" aria-hidden="true"></i>  <i *ngIf="currentUserId != message.posterId" class="fa fa-exclamation-triangle" aria-hidden="true"></i></p>
+            <p>
+              {{message.likes.length}} likes
+              <i *ngIf="currentUserId != message.posterId" class="fa fa-thumbs-o-up" aria-hidden="true" (click)="LikeMessage(message.id)"></i>
+              <i *ngIf="currentUserId != message.posterId" class="fa fa-exclamation-triangle" aria-hidden="true" (click)="FlagMessage(message.id)"></i>
+              {{message.datetime}}
+            </p>
             <hr>
           </ng-container>
           <div *ngIf="loggedIn">

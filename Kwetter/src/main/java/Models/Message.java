@@ -2,8 +2,14 @@ package Models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
@@ -30,6 +36,9 @@ public class Message implements Serializable {
     @Column(name = "posterid")
     private long posterId;
     
+    @Column(name = "datetime")
+    private Date datetime;
+    
     @Column(name = "poster")
     private String poster;
     
@@ -40,14 +49,19 @@ public class Message implements Serializable {
     @JoinColumn(name = "profileId")
     private Profile owner;
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Profile> likes;
+    @ElementCollection
+    private List<String> likes;
+    
+    @ElementCollection
+    private List<String> flags;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Profile> mentions;
+    @ElementCollection
+    private List<String> mentions;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tag> tags;
+    
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
     /**
      *
@@ -67,6 +81,7 @@ public class Message implements Serializable {
         this.poster = owner.getName();
         this.posterImage = owner.getPhoto();
         this.tags = getTagsFromMessage(content);
+        this.datetime = new Date();
     }
 
     /**
@@ -76,11 +91,11 @@ public class Message implements Serializable {
      * @param mentions
      * @param tags
      */
-    public Message(String content, Profile owner, List<Profile> mentions, List<Tag> tags) {
+    public Message(String content, Profile owner, List<String> mentions) {
         this.content = content;
         this.owner = owner;
         this.mentions = mentions;
-        this.tags = tags;
+        this.tags = getTagsFromMessage(content);
         this.poster = this.owner.getName();
         this.posterImage = this.owner.getPhoto();
         this.posterId = this.owner.getId();
@@ -122,7 +137,7 @@ public class Message implements Serializable {
      *
      * @return
      */
-    public List<Profile> getMentions() {
+    public List<String> getMentions() {
         return mentions;
     }
 
@@ -130,7 +145,7 @@ public class Message implements Serializable {
      *
      * @param mentions
      */
-    public void setMentions(List<Profile> mentions) {
+    public void setMentions(List<String> mentions) {
         this.mentions = mentions;
     }
 
@@ -154,7 +169,7 @@ public class Message implements Serializable {
      *
      * @return
      */
-    public List<Profile> getLikes() {
+    public List<String> getLikes() {
         return likes;
     }
 
@@ -162,7 +177,7 @@ public class Message implements Serializable {
      *
      * @param likes
      */
-    public void setLikes(List<Profile> likes) {
+    public void setLikes(List<String> likes) {
         this.likes = likes;
     }
 
@@ -189,6 +204,24 @@ public class Message implements Serializable {
     public void setPosterId(long posterid) {
         this.posterId = posterid;
     }
+
+    public List<String> getFlags() {
+        return flags;
+    }
+
+    public void setFlags(List<String> flags) {
+        this.flags = flags;
+    }
+
+    public Date getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
+    }
+    
+    
     
      private List<Tag> getTagsFromMessage(String message) {
         Pattern MY_PATTERN = Pattern.compile("#(\\S+)");

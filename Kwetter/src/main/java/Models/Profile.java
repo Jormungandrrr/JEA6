@@ -39,7 +39,7 @@ public class Profile implements Serializable{
     private  String photo;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Profile> following;
 
     @JsonIgnore

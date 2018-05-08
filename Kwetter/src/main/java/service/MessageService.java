@@ -1,9 +1,7 @@
 package service;
 
-import Dao.AccountDao;
 import Dao.JPA;
 import Dao.MessageDao;
-import Models.Account;
 import Models.Message;
 
 import javax.inject.Inject;
@@ -50,7 +48,7 @@ public class MessageService {
      * @param id
      * @return
      */
-    public Message findById(int id) {
+    public Message findById(long id) {
         return messageDao.find(id);
     }
 

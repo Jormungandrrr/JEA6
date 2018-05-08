@@ -74,11 +74,11 @@ public class MessageResource {
      */
     @POST
     @Path("{id}/like")
-    public void likemessage(@PathParam("id") int id, @QueryParam("profileid") long profileid) {
+    public void likemessage(@PathParam("id") long id, @QueryParam("profileid") int profileid) {
          Message message = m.findById(id);
          Profile prof = p.findById(profileid);
-         List<Profile> likes = message.getLikes();
-         likes.add(prof);
+         List<String> likes = message.getLikes();
+         likes.add(prof.getName());
          message.setLikes(likes);
     }
     
@@ -90,11 +90,11 @@ public class MessageResource {
     @POST
     @Path("{id}/flag")
     public void flagmessage(@PathParam("id") int id, @QueryParam("profileid") long profileid) {
-//         Message message = m.findById(id);
-//         Profile prof = p.findById(profileid);
-//         List<Profile> likes = message();
-//         likes.add(prof);
-//         message.setLikes(likes);
+         Message message = m.findById(id);
+         Profile prof = p.findById(profileid);
+         List<String> flags = message.getFlags();
+         flags.add(prof.getName());
+         message.setFlags(flags);
     }
     
 }

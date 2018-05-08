@@ -58,7 +58,12 @@ export class ProfileComponent implements OnInit {
     this.profileService.UpdateProfile(this.profile).subscribe();
   }
 
-  LikeMessage() {
+  LikeMessage(MessageID: number) {
+    this.messageService.LikeMessage(MessageID, this.profile.id).subscribe();
+  }
+
+  FlagMessage(MessageID: number) {
+    this.messageService.FlagMessage(MessageID, this.profile.id).subscribe();
   }
 
   constructor(private route: ActivatedRoute, private profileService: ProfileService, private messageService: MessageService) {
