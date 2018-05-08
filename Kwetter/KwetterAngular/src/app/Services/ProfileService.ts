@@ -15,13 +15,12 @@ export class ProfileService {
     return this.http.get<Profile>('http://localhost:8080/Kwetter/api/accounts/' + username + '/profile');
   }
 
-  placeMessage(PosterID: number, profileID: number, message: string) {
+  placeMessage(profileID: number, message: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
     const params = new HttpParams()
-      .set('ownerid', PosterID.toString())
       .set('content', message);
     const options = {
       headers,

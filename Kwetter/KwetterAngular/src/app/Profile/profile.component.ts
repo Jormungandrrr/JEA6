@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
   }
 
   PlaceMessage() {
-    this.profileService.placeMessage(this.currentUserId, this.profile.id, this.content).subscribe(data => {
+    this.profileService.placeMessage(this.profile.id, this.content).subscribe(data => {
       if (data != null) {
         this.profile.messages.push(data);
       }
