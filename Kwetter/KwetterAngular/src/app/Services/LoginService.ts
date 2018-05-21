@@ -14,7 +14,6 @@ export class LoginService {
   Login(username: string, password: string): Observable<HttpResponse<Account>> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': ''
   });
     const params = new HttpParams()
       .set('username', username)

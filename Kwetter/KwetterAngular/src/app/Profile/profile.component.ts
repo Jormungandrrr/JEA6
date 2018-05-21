@@ -46,10 +46,7 @@ export class ProfileComponent implements OnInit {
   UnLikeProfile() {
     this.profileService.UnLikeProfile(this.currentUserId, this.profile.id).subscribe(data => {
       if (data != null) {
-        const index: number = this.profile.following.indexOf(data);
-        if (index !== -1) {
-          this.profile.following.splice(index, 1);
-        }
+        this.profile.following = data.following;
       }
     });
   }

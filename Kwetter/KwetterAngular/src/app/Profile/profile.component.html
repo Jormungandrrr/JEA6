@@ -47,7 +47,6 @@
               <i *ngIf="currentUserId != message.posterId" class="fa fa-thumbs-o-up" aria-hidden="true" (click)="LikeMessage(message.id)"></i>
               <i *ngIf="currentUserId != message.posterId" class="fa fa-exclamation-triangle" aria-hidden="true" (click)="FlagMessage(message.id)"></i>
               {{message.datetime}}
-            </p>
             <hr>
           </ng-container>
           <div *ngIf="loggedIn">
