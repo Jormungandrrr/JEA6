@@ -70,4 +70,8 @@ export class ProfileService {
     };
     return this.http.post<Profile>(this.apiUrl + profile.id, null, options);
   }
+
+  searchUsers(query: string): Observable<Message[]> {
+    return this.http.get<Message[]>(this.apiUrl + 'searchMessages?searchterm=' + query);
+  }
 }

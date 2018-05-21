@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Models.Message;
 import Models.Profile;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +18,10 @@ import javax.persistence.TypedQuery;
  *
  * @author Jorrit
  */
-@Stateless @JPA
+@Stateless
+@JPA
 public class ProfileDao extends DaoFacade<Profile> {
-    
+
     /**
      *
      */
@@ -41,20 +43,26 @@ public class ProfileDao extends DaoFacade<Profile> {
      */
     public ArrayList<Profile> getProfiles() {
         Query query = em.createQuery("SELECT p FROM Profile p");
-        return  new ArrayList<>(query.getResultList());
+        return new ArrayList<>(query.getResultList());
     }
-    
+
     public Profile findByName(String name) {
         TypedQuery<Profile> query = em.createNamedQuery("profile.findByname", Profile.class);
         query.setParameter("name", name);
         List<Profile> result = query.getResultList();
         return result.get(0);
     }
-    
-     public Profile findByUsername(String username) {
+
+    public Profile findByUsername(String username) {
         TypedQuery<Profile> query = em.createNamedQuery("profile.findByUsername", Profile.class);
         query.setParameter("username", username);
         List<Profile> result = query.getResultList();
         return result.get(0);
+    }
+
+    public List<Message> search(String searchTerm) {
+        return em.createQuery("SELECT m FROM Message m WHERE m.content LIKE :searchterm")
+                .setParameter("searchterm", "%" + searchTerm + "%")
+                .getResultList();
     }
 }

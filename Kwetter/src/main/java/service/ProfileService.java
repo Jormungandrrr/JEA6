@@ -2,11 +2,13 @@ package service;
 
 import Dao.JPA;
 import Dao.ProfileDao;
+import Models.Message;
 import Models.Profile;
 
 import javax.inject.Inject;
 import javax.ejb.Stateless;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -57,6 +59,10 @@ public class ProfileService {
     
     public Profile findByUsername(String username) {
         return profileDao.findByUsername(username);
+    }
+    
+    public List<Message> searchMessages(String searchTerm){
+        return profileDao.search(searchTerm);
     }
     /**
      *

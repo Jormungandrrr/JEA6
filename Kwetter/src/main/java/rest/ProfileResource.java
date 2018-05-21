@@ -13,6 +13,7 @@ import java.util.List;
 import javax.crypto.spec.SecretKeySpec;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -25,6 +26,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import service.KeyGenerator;
 import service.MessageService;
 import service.ProfileService;
@@ -169,5 +171,13 @@ public class ProfileResource {
     public void deleteProfile(@PathParam("id") int id) {
         Profile prof = p.findById(id);
         p.removeProfile(prof);
+    }
+    
+    @GET
+    @Path("/searchMessages")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response search(@QueryParam("searchterm") String searchterm, @Context HttpServletResponse response) {
+        List<Message> messages = p.searchMessages(searchterm);
+        return Response.ok(messages).build();
     }
 }

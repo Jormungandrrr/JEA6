@@ -13,6 +13,7 @@ export class LoginComponent {
   password;
 
   constructor(private loginService: LoginService, private router: Router ) {
+    localStorage.clear();
   }
 
   Login() {

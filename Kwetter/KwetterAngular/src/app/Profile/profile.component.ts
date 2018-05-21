@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   loggedIn: boolean;
   role: string;
   currentUserId: number;
+  searchQuery: string;
 
   public ngOnInit() {
     this.route.params.subscribe(params => { this.username = params['username']; });
@@ -61,6 +62,12 @@ export class ProfileComponent implements OnInit {
 
   FlagMessage(MessageID: number) {
     this.messageService.FlagMessage(MessageID, this.profile.id).subscribe();
+  }
+
+  onSearch(): void {
+    this.profileService.searchUsers(this.searchQuery).subscribe((data) => {
+      this.profile.messages = data;
+    });
   }
 
   constructor(private route: ActivatedRoute, private profileService: ProfileService, private messageService: MessageService) {

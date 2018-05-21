@@ -38,6 +38,9 @@
     <div class="w3-twothird">
       <div class="w3-container w3-card w3-white w3-margin-bottom">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Timeline</h2>
+        <input [(ngModel)]="searchQuery" type="text" name="email" class="form-control" id="email"placeholder="Zoek" (keyup)="onSearch()" style="width:40%">
+        <br>
+        <br>
         <div class="w3-container">
           <ng-container *ngFor="let message of profile.messages">
             <h5 class="w3-opacity"><b><img src="{{message.posterImage}}" style="width:5%">{{message.poster}}</b></h5>

@@ -4,8 +4,12 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.xml.bind.annotation.XmlTransient;
 import service.AccountService;
 
 /**
@@ -14,13 +18,15 @@ import service.AccountService;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "account.findByname", query = "SELECT a FROM Account a WHERE a.username = :username"),
-        @NamedQuery(name = "account.count", query = "SELECT COUNT(a) FROM Account a"),
+    @NamedQuery(name = "account.findByname", query = "SELECT a FROM Account a WHERE a.username = :username")
+    ,
+        @NamedQuery(name = "account.count", query = "SELECT COUNT(a) FROM Account a")
+    ,
         @NamedQuery(name = "account.login", query = "SELECT a FROM Account a Where a.username = :username AND a.password = :password")
 })
-        
+
 @XmlRootElement
-public class Account implements Serializable{
+public class Account implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +35,10 @@ public class Account implements Serializable{
     private String username;
 
     private String email;
-    
+
+    @XmlTransient
     private String password;
-    
+
     private String token;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -50,11 +57,11 @@ public class Account implements Serializable{
     /**
      *
      * @param username
-     * @param email  
+     * @param email
      * @param rights
      * @param hash
      */
-    public Account(String username, String email, Role role, String password){
+    public Account(String username, String email, Role role, String password) {
         this.username = username;
         this.email = email;
         this.role = role;
@@ -138,7 +145,7 @@ public class Account implements Serializable{
     }
 
     public void setPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-         this.password = AccountService.hashPassword(password);
+        this.password = AccountService.hashPassword(password);
     }
 
     public String getToken() {
@@ -169,5 +176,17 @@ public class Account implements Serializable{
         }
         final Account other = (Account) obj;
         return Objects.equals(this.username, other.username);
+    }
+
+    public JsonObject toJson(URI self) {
+        return Json.createObjectBuilder()
+                .add("username", this.username)
+                .add("email", this.email)
+                .add("role", this.role.getName())
+                .add("_links", Json.createObjectBuilder()
+                        .add("rel", "self")
+                        .add("href", self.toString())
+                )
+                .build();
     }
 }
