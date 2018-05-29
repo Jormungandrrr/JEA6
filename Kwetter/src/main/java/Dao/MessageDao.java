@@ -40,4 +40,9 @@ public class MessageDao extends DaoFacade<Message>{
         Query query = em.createQuery("SELECT m FROM Message m");
         return  new ArrayList<>(query.getResultList());
     }
+    
+    public ArrayList<Message> getFlaggedMessages() {
+        Query query = em.createQuery("SELECT m FROM Message m  WHERE size(m.flags) > 0");
+        return new ArrayList<>(query.getResultList());
+    }
 }

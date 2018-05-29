@@ -59,7 +59,7 @@ public class AccountResource {
     @GET
     @Path("{id}/get")
     @Produces(MediaType.APPLICATION_JSON)
-    public Account getById(@PathParam("id") int id) {
+    public Account getById(@PathParam("id") long id) {
         Account acc = a.findById(id);
         return acc;
     }

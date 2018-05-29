@@ -13,6 +13,7 @@ import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import javax.inject.Inject;
 import service.AccountService;
@@ -25,7 +26,7 @@ import service.RoleService;
  */
 @Named(value = "admin")
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class AdminBean implements Serializable {
 
     @Inject
@@ -43,7 +44,7 @@ public class AdminBean implements Serializable {
     public void init() {
         accounts = as.getAccounts();
         roles = rs.getRoles();
-        messages = ms.getMessages();
+        messages = ms.getFlaggedMessages();
     }
     
     public void onRoleChange() {

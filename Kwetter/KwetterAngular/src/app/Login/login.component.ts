@@ -21,6 +21,7 @@ export class LoginComponent {
      if (data != null) {
        console.log(data.headers);
        localStorage.setItem('email', data.body.email);
+       localStorage.setItem('currentProfile', data.body.profile.name);
        localStorage.setItem('role', data.body.role.name);
        localStorage.setItem('profileId', data.body.profile.id.toString());
        localStorage.setItem('loggedIn', String(true));

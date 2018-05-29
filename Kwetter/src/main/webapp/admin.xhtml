@@ -9,7 +9,7 @@
     <h:head>
     </h:head>
     <h:body>
-        <h:form>   
+        <h:form id="form">   
             <p:tabMenu activeIndex="#{param.i}">
                 <p:menuitem value="Home" outcome="/home" icon="ui-icon-star">
                     <f:param name="i" value="0" />
@@ -38,16 +38,13 @@
                     </p:selectOneMenu>
                 </p:column>
             </p:dataTable>
-            <p:commandButton value="Update" actionListener="#{admin.onRoleChange}"/>
+            <p:commandButton value="Update" update="form" actionListener="#{admin.onRoleChange()}" process="@this"/>
             <p:dataTable var="message" value="#{admin.messages}">
                 <p:column headerText="Eigenaar">
                     <h:outputText value="#{message.poster}" />
                 </p:column>
                 <p:column headerText="Content">
                     <h:outputText value="#{message.content}" />
-                </p:column>
-                 <p:column headerText="Flagged">
-                    <h:outputText value="#{message.flags.size()}" />
                 </p:column>
                  <p:column headerText="Delete">
                     <p:commandButton value="Delete" actionListener="#{admin.onMessageDelete}"/>

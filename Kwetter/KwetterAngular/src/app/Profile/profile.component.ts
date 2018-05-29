@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   role: string;
   currentUserId: number;
   searchQuery: string;
+  ws: WebSocket;
 
   public ngOnInit() {
     this.route.params.subscribe(params => { this.username = params['username']; });
@@ -25,6 +26,8 @@ export class ProfileComponent implements OnInit {
       if (data != null) {
         this.profile = data;
       }
+      this.ws = new WebSocket('ws://localhost:8080/Kwetter/messageSocket/' + this.username);
+      this.SetWebsocket();
     });
   }
 
@@ -32,6 +35,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.placeMessage(this.profile.id, this.content).subscribe(data => {
       if (data != null) {
         this.profile.messages.push(data);
+        this.ws.send(data.content + ' Posted by ' + localStorage.getItem('currentProfile'));
       }
     });
   }
@@ -70,7 +74,23 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  constructor(private route: ActivatedRoute, private profileService: ProfileService, private messageService: MessageService) {
+  private SetWebsocket() {
+    this.ws.onopen = (e) => {
+      console.log('Connected');
+    };
+    this.ws.onerror = (e) => {
+      alert(e);
+    }
+
+    this.ws.onmessage = (e) => {
+      console.log('Message posted: ' + e.data);
+    };
+  }
+
+  constructor(
+    private route: ActivatedRoute,
+    private profileService: ProfileService,
+    private messageService: MessageService) {
     this.loggedIn = Boolean(localStorage.getItem('loggedIn'));
     this.role = localStorage.getItem('role');
     this.currentUserId = Number(localStorage.getItem('profileId'));

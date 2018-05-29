@@ -22,7 +22,9 @@ import service.ProfileService;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "message.count", query = "SELECT COUNT(m) FROM Message m")})
+    @NamedQuery(name = "message.count", query = "SELECT COUNT(m) FROM Message m"),
+    @NamedQuery(name = "message.flagged", query = "SELECT COUNT(m) FROM Message m WHERE size(m.flags) > 0")
+})
 @XmlRootElement
 public class Message implements Serializable {
 
@@ -220,6 +222,13 @@ public class Message implements Serializable {
     public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
+
+    @Override
+    public String toString() {
+        return this.content + " Posted by " + this.owner.getName();
+    }
+    
+    
     
     
     

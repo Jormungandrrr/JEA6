@@ -63,7 +63,7 @@ public class AccountService {
      * @param id
      * @return
      */
-    public Account findById(int id) {
+    public Account findById(long id) {
         return accountDao.find(id);
     }
 

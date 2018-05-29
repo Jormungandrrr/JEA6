@@ -42,6 +42,10 @@ public class MessageService {
     public ArrayList<Message> getMessages() {
         return messageDao.getMessages();
     }
+    
+    public ArrayList<Message> getFlaggedMessages() {
+        return messageDao.getFlaggedMessages();
+    }
 
     /**
      *
