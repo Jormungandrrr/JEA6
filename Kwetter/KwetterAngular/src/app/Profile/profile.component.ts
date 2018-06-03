@@ -3,6 +3,7 @@ import {Profile} from '../Models/Profile';
 import { ActivatedRoute } from '@angular/router';
 import {ProfileService} from '../Services/ProfileService';
 import {MessageService} from '../Services/MessageService';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile' ,
@@ -74,6 +75,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  showSuccess(msg: string, title: string) {
+    this.toastr.success(msg, title);
+  }
+
   private SetWebsocket() {
     this.ws.onopen = (e) => {
       console.log('Connected');
@@ -83,6 +88,7 @@ export class ProfileComponent implements OnInit {
     }
 
     this.ws.onmessage = (e) => {
+      this.showSuccess(e.data, 'Websocket')
       console.log('Message posted: ' + e.data);
     };
   }
@@ -90,7 +96,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private profileService: ProfileService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private toastr: ToastrService) {
     this.loggedIn = Boolean(localStorage.getItem('loggedIn'));
     this.role = localStorage.getItem('role');
     this.currentUserId = Number(localStorage.getItem('profileId'));
