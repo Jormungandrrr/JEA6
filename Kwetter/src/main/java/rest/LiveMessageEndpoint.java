@@ -36,12 +36,13 @@ public class LiveMessageEndpoint {
     private Session session;
     private static Set<LiveMessageEndpoint> Endpoints = new CopyOnWriteArraySet<>();
     private static HashMap<String, String> users = new HashMap<>();
+    private Profile profile;
 
     @OnOpen
     public void onOpen(Session session, @PathParam("username") String username) throws IOException {
         this.session = session;
+        this.profile = profileService.findByUsername(username);
         Endpoints.add(this);
-        Profile p = profileService.findByUsername(username);
         users.put(session.getId(), username);
         broadcast("connected to " + p.getName());
     }
@@ -49,23 +50,25 @@ public class LiveMessageEndpoint {
     @OnMessage
     public void onMessage(Session session, String message) 
       throws IOException {
-        broadcast(message);
+        broadcast(message, this.profile.getName());
     }
  
     @OnClose
     public void onClose(Session session) throws IOException {
   
         Endpoints.remove(this);
-        broadcast("Disconnected!");
+        //broadcast("Disconnected!");
     }
 
     
-    private static void broadcast(String message) 
+    private static void broadcast(String message, String profileName) 
       throws IOException {
         Endpoints.forEach(endpoint -> {
             synchronized (endpoint) {
                 try {
-                    endpoint.session.getBasicRemote().sendText(message);
+                    if (endpoint.profile.getName() == profileName) {
+                         endpoint.session.getBasicRemote().sendText(message);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
