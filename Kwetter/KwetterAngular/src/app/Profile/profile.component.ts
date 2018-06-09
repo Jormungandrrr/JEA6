@@ -85,10 +85,10 @@ export class ProfileComponent implements OnInit {
     };
     this.ws.onerror = (e) => {
       alert(e);
-    }
+    };
 
     this.ws.onmessage = (e) => {
-      this.showSuccess(e.data, 'Websocket')
+      this.showSuccess(e.data, 'Websocket');
       console.log('Message posted: ' + e.data);
     };
   }

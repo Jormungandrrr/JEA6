@@ -44,7 +44,7 @@ public class LiveMessageEndpoint {
         this.profile = profileService.findByUsername(username);
         Endpoints.add(this);
         users.put(session.getId(), username);
-        broadcast("connected to " + p.getName());
+        broadcast("connected to " + profile.getName(), profile.getName());
     }
     
     @OnMessage

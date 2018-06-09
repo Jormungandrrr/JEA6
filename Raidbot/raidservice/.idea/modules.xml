@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Kwetter.iml" filepath="$PROJECT_DIR$/.idea/Kwetter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/raidservice.iml" filepath="$PROJECT_DIR$/raidservice.iml" />
     </modules>
   </component>
 </project>
