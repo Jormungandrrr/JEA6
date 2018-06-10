@@ -1,7 +1,9 @@
 package com.accountservice.accountservice;
 
+import javax.persistence.Entity;
 import java.io.Serializable;
 
+@Entity
 public class Account implements Serializable {
 
     String name;
