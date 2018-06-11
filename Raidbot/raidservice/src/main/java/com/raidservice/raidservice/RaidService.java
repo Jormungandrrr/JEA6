@@ -5,11 +5,18 @@
  */
 package com.raidservice.raidservice;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -27,6 +34,26 @@ public class RaidService {
     public Raid create(Raid r) {
         this.raids.add(r);
         return r;
+    }
+
+    public boolean joinRaid(String gymname, String playername) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("http://localhost:8081/raidbot/players/name?name=" + playername);
+        String response = target.request(MediaType.APPLICATION_JSON).get(String.class);
+        System.out.println(response);
+        JsonObject o = new JsonParser().parse(response).getAsJsonObject();
+        System.out.println(o.toString());
+        Player p = new Gson().fromJson(o.toString(), Player.class);
+        System.out.println(p.name);
+        if (p != null) {
+            for (Raid r : this.raids) {
+                if (r.gymName.equals(gymname)) {
+                    r.players.add(p);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public List<Raid> getRaids() {

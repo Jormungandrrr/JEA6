@@ -6,6 +6,7 @@
 package com.raidservice.raidservice;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,17 +16,17 @@ import java.util.List;
 public class Raid implements Serializable{
     String gymName;
     String boss;
-    long x;
-    long y;
+    double lat;
+    double lng;
     long time;
-    List<Player> players;
+    List<Player> players = new ArrayList<>();
 
-    public Raid(String gymName, String boss, long x, long y, long time) {
+    public Raid(String gymName, String boss, double lat, double lng, long time) {
         this.gymName = gymName;
         this.boss = boss;
         this.time = time;
-        this.x = x;
-        this.y = y;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public String getBoss() {
@@ -60,20 +61,20 @@ public class Raid implements Serializable{
         this.players = players;
     }
 
-    public long getX() {
-        return x;
+    public double getLat() {
+        return lat;
     }
 
-    public void setX(long x) {
-        this.x = x;
+    public void setLat(long lat) {
+        this.lat = lat;
     }
 
-    public long getY() {
-        return y;
+    public double getLng() {
+        return lng;
     }
 
-    public void setY(long y) {
-        this.y = y;
+    public void setLng(long lng) {
+        this.lng = lng;
     }
     
     

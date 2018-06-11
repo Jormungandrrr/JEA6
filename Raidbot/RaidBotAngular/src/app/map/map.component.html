@@ -1,0 +1,14 @@
+<agm-map [latitude]="mapCanvas.lat" [longitude]="mapCanvas.lng">
+  <ng-container *ngFor="let raid of raids">
+  <agm-marker  [latitude]="raid.lat"[longitude]="raid.lng">
+    <agm-info-window>
+      Gym: {{raid.gymName}}<br />
+      Boss: {{raid.boss}}<br />
+      Players:<br />
+      <ng-container *ngFor="let p of raid.players">
+        {{p.name}} - level {{p.level}}<br />
+      </ng-container>
+    </agm-info-window>
+  </agm-marker>
+  </ng-container>
+</agm-map>

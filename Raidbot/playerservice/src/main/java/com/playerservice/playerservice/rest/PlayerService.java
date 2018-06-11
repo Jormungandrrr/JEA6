@@ -32,4 +32,13 @@ public class PlayerService {
     public List<Player> getPlayers() {
         return this.players;
     }
+    
+    public Player getPlayer(String name) {
+        for (Player p : this.players) {
+            if (p.name.equals(name)) {
+                return p;
+            }
+        }
+        return null;
+    }
 }

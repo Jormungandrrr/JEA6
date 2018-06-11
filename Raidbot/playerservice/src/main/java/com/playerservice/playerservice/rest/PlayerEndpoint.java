@@ -21,6 +21,13 @@ public class PlayerEndpoint {
     public List<Player> get() {
         return service.getPlayers();
     }
+    
+    @GET
+    @Path("/name")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Player get(@QueryParam("name") String name) {
+        return service.getPlayer(name);
+    }
 
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
