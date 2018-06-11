@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.raidservice.raidservice.rest;
+package com.raidservice.raidservice;
 
 import java.io.Serializable;
 import java.util.List;
-import javafx.geometry.Point2D;
 
 /**
  *

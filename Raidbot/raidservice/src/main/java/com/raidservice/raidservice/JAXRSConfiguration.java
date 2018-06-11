@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.raidservice.raidservice.rest;
+package com.raidservice.raidservice;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

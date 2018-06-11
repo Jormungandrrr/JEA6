@@ -1,6 +1,6 @@
 swarm:
     http:
-        port: 8081
+        port: 8080
     datasources:
         jdbc-drivers:
             com.mysql:

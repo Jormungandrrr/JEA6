@@ -1,11 +1,9 @@
-package com.raidservice.raidservice.rest;
+package com.raidservice.raidservice;
 
 import java.util.Date;
 import java.util.List;
-import javafx.geometry.Point2D;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Produces;
