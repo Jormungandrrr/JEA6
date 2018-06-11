@@ -1,3 +1,15 @@
 swarm:
     http:
         port: 8081
+    datasources:
+        jdbc-drivers:
+            com.mysql:
+                driver-class-name: com.mysql.jdbc.Driver
+                xa-datasource-class-name: com.mysql.jdbc.jdbc2.optional.MysqlXADataSource
+                driver-module-name: com.mysql
+    data-sources:
+        RaidBotDS:
+            driver-name: com.mysql
+            connection-url: jdbc:mysql://192.168.25.70:3306/raidbot
+            user-name: gebruiker
+            password: gebruiker
