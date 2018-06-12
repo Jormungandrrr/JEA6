@@ -31,7 +31,12 @@ public class RaidService {
     public void init() {
     }
 
-    public Raid create(Raid r) {
+    public Raid create(Raid r, String bossName) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("http://localhost:8083/raidbot/bosses/boss?name=" + bossName);
+        String response = target.request(MediaType.APPLICATION_JSON).get(String.class);
+        JsonObject o = new JsonParser().parse(response).getAsJsonObject();
+        r.boss = new Gson().fromJson(o.toString(), Boss.class);
         this.raids.add(r);
         return r;
     }
@@ -40,11 +45,8 @@ public class RaidService {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target("http://localhost:8081/raidbot/players/name?name=" + playername);
         String response = target.request(MediaType.APPLICATION_JSON).get(String.class);
-        System.out.println(response);
         JsonObject o = new JsonParser().parse(response).getAsJsonObject();
-        System.out.println(o.toString());
         Player p = new Gson().fromJson(o.toString(), Player.class);
-        System.out.println(p.name);
         if (p != null) {
             for (Raid r : this.raids) {
                 if (r.gymName.equals(gymname)) {

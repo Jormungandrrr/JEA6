@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.raidservice.raidservice;
+package com.bossservice.bossservice;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,24 +15,25 @@ import java.util.List;
  */
 public class Raid implements Serializable{
     String gymName;
-    Boss boss;
+    String boss;
     double lat;
     double lng;
     long time;
     List<Player> players = new ArrayList<>();
 
-    public Raid(String gymName, double lat, double lng, long time) {
+    public Raid(String gymName, String boss, double lat, double lng, long time) {
         this.gymName = gymName;
+        this.boss = boss;
         this.time = time;
         this.lat = lat;
         this.lng = lng;
     }
 
-    public Boss getBoss() {
+    public String getBoss() {
         return boss;
     }
 
-    public void setBoss(Boss boss) {
+    public void setBoss(String boss) {
         this.boss = boss;
     }
 

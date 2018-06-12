@@ -3,7 +3,7 @@
   <agm-marker  [latitude]="raid.lat"[longitude]="raid.lng">
     <agm-info-window>
       Gym: {{raid.gymName}}<br />
-      Boss: {{raid.boss}}<br />
+      Boss: {{raid.boss.name}}<br />
       Players:<br />
       <ng-container *ngFor="let p of raid.players">
         {{p.name}} - level {{p.level}}<br />

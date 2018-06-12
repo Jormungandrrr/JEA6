@@ -28,7 +28,7 @@ public class RaidEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Raid create(@QueryParam("gym") String gym, @QueryParam("boss") String boss, @QueryParam("lat") double lat, @QueryParam("lng") double lng, @QueryParam("minutes") int minutes) {
         long date = new Date().getTime() + minutes * 60000;
-        return service.create(new Raid(gym,boss,lat,lng,date));
+        return service.create(new Raid(gym,lat,lng,date), boss);
     }
     
     @POST

@@ -1,12 +1,14 @@
+import {Boss} from './Boss';
+
 export class Raid {
   gymName: string;
-  boss: string;
+  boss: Boss;
   lat: number;
   lng: number;
   time: number;
   players?: any;
 
-  constructor(gymName: string, boss: string, lat: number, lng: number, time: number) {
+  constructor(gymName: string, boss: Boss, lat: number, lng: number, time: number) {
     this.gymName = gymName;
     this.boss = boss;
     this.lat = lat;
